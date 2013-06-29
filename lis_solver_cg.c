@@ -208,7 +208,19 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		// assuming no error in precondition
 		// suifengls: checksum Z
 		lis_vector_dot(Ones, z, &cksZ);
-
+		/*
+		// suifengls: introduce an error
+		if(!rank && iter == 8)
+			lis_vector_set_value(LIS_INS_VALUE, 0, 100, r); 
+		lis_vector_dot(Ones, z, &checksum);
+		rerrX = fabs(checksum - cksZ)/fabs(cksZ);
+		if(!rank)
+			printf("sum of Z = %e, checksum = %e\n", checksum, cksZ);
+		if(rerrX > eps && !rank)
+		{
+			printf("========== error detected in Z: %e ==========\n", rerrX);
+		}
+		*/
 		/* rho = <r,z> */
 		lis_vector_dot(r,z,&rho);
 
@@ -250,21 +262,23 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		rerrX = fabs(checksum - cksX)/fabs(cksX);
 		if(rerrX > eps && !rank)
 		{
-			printf("========== error detected in X: %e ==========\n", rerrX);
+			printf("========== error detected in X: %e at iteration %d ==========\n", rerrX, iter);
 			printf("sum of X = %e, checksum = %e\n", checksum, cksX);
 		}
 		
 		/* r = r - alpha*q */
 		lis_vector_axpy(-alpha,q,r);
 		// suifengls: checksum R
-		//cksR = cksR - alpha * cksQ;
+		cksR = cksR - alpha * cksQ;
+		/*
 		lis_vector_dot(Ones, r, &checksum);
 		rerrR = fabs(checksum - cksR)/fabs(cksR);
 		if((cksR > eps && checksum > eps) && rerrR > eps && !rank)
 		{
 			printf("========== error detected in R: %e ==========\n", rerrR);
-		}
 			printf("sum of R = %e, checksum = %e\n", checksum, cksR);
+		}
+		*/
 
 		/* convergence check */
 		lis_solver_get_residual[conv](r,solver,&nrm2);
