@@ -195,7 +195,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	//printf("AN = %d, cksA = %e\n", gloN, cksA);
 	lis_output_vector(sumA, LIS_FMT_MM, "sumA");
 	// initialize all checksum
-	cksZ = 0.0, cksP = 0.0, cksQ = 0.0, cksX = 0.0, checksum = 0.0;
+	cksR = 0.0, cksZ = 0.0, cksP = 0.0, cksQ = 0.0, cksX = 0.0, checksum = 0.0;
 	lis_vector_dot(Ones, r, &cksR);
 	
 	for( iter=1; iter<=maxiter; iter++ )
@@ -263,8 +263,8 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		if((cksR > eps && checksum > eps) && rerrR > eps && !rank)
 		{
 			printf("========== error detected in R: %e ==========\n", rerrR);
-			printf("sum of R = %e, checksum = %e\n", checksum, cksR);
 		}
+			printf("sum of R = %e, checksum = %e\n", checksum, cksR);
 
 		/* convergence check */
 		lis_solver_get_residual[conv](r,solver,&nrm2);
