@@ -1,11 +1,10 @@
 ======
+
 Conjugate Gradient(CG)
 
- ***************************************
  
  * Preconditioned Conjugate Gradient   *
  
- ***************************************
  
  r(0)    = b - Ax(0)
  
@@ -13,7 +12,6 @@ Conjugate Gradient(CG)
  
  p(0)    = (0,...,0)^T
  
- ***************************************
  
  for k=1,2,...
  
@@ -35,7 +33,6 @@ Conjugate Gradient(CG)
    
    r(k)      = r(k-1) - alpha*q(k)
  
- ***************************************
 
 1. vector relationship:
 
