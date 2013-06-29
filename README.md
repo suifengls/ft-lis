@@ -1,7 +1,12 @@
-======
+FT-LIS (private)
+========
+
+Falut-Tolerant LIS
+
+Work harder for PPoPP 09/01/2013
 
 Conjugate Gradient(CG)
- 
+-------- 
          ---------------------------------
          
          r(0)    = b - Ax(0)
@@ -55,5 +60,3 @@ Conjugate Gradient(CG)
         if cksQ* is incorrect -> cksR* is incorrect -> cksZ is incorrect(next iteration)
         
         if cksZ* is incorrect -> cksP* is incorrect -> cksX is incorrect
-
-======
