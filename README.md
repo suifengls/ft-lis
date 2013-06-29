@@ -1,4 +1,3 @@
-
 ======
 Conjugate Gradient(CG)
 
@@ -22,9 +21,13 @@ Conjugate Gradient(CG)
  ***************************************/
 
 1. vector relationship:
+
         p = z + beta * p
+        
         q = A * p
+        
         x = x + alpha * p
+        
         r = r - alpha * q
 
 2. checksum relationship map:
@@ -35,7 +38,9 @@ Conjugate Gradient(CG)
         checksum R <------ checksum Q
 
 3. check checksum X only
+
         if cksQ* is incorrect -> cksR* is incorrect -> cksZ is incorrect(next iteration)
+        
         if cksZ* is incorrect -> cksP* is incorrect -> cksX is incorrect
 
 ======
