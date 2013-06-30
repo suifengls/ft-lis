@@ -142,7 +142,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	// suifengls: ft-defined variables
 	int rank; // tmp
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank); // tmp
-	LIS_SCALAR eps = 1e-8, rerrX, rerrR;
+	LIS_SCALAR eps = 1e-10, rerrX, rerrR;
 	LIS_INT locN, gloN;
 	LIS_VECTOR sumA, Ones;
 	LIS_SCALAR cksA, cksR, cksZ, cksP, cksQ, cksX, checksum;
@@ -258,6 +258,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		lis_vector_axpy(alpha,p,x);
 		// suifengls: checksum X
 		cksX = cksX + alpha * cksP;
+		// suifengls: checking cksX
 		lis_vector_dot(Ones, x, &checksum);
 		rerrX = fabs(checksum - cksX)/fabs(cksX);
 		if(rerrX > eps && !rank)
@@ -270,15 +271,15 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		lis_vector_axpy(-alpha,q,r);
 		// suifengls: checksum R
 		cksR = cksR - alpha * cksQ;
-		/*
+		
+		// suifengls: checking cksR
 		lis_vector_dot(Ones, r, &checksum);
 		rerrR = fabs(checksum - cksR)/fabs(cksR);
-		if((cksR > eps && checksum > eps) && rerrR > eps && !rank)
+		if((fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !rank)
 		{
-			printf("========== error detected in R: %e ==========\n", rerrR);
+			printf("========== error detected in R: %e at iteration %d ==========\n", rerrR, iter);
 			printf("sum of R = %e, checksum = %e\n", checksum, cksR);
 		}
-		*/
 
 		/* convergence check */
 		lis_solver_get_residual[conv](r,solver,&nrm2);

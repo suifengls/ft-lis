@@ -55,8 +55,16 @@ Conjugate Gradient(CG)
                                 ↓
         checksum R <------ checksum Q
 
-3. check checksum X only
+3. check checksum X only, ideally
+
+Assume not error in proconditioning z=Br
 
         if cksQ* is incorrect -> cksR* is incorrect -> cksZ is incorrect(next iteration)
         
         if cksZ* is incorrect -> cksP* is incorrect -> cksX is incorrect
+
+3\*. check checksum of X and R 
+
+		step 3 is insufficient to detect all the error in all vectors
+
+		add checking cksR
