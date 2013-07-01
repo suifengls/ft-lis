@@ -50,21 +50,21 @@ Conjugate Gradient(CG)
 
 2. checksum relationship map:
 
-        checksum X <------ checksum P <------ checksum Z
+        checksum X *------ checksum P *------ checksum Z
                                 |
-                                ↓
-        checksum R <------ checksum Q
+                                *
+        checksum R *------ checksum Q
 
 3. check checksum X only, ideally
 
-        Assume not error in proconditioning z=Br
-
-        if cksQ* is incorrect -> cksR* is incorrect -> cksZ is incorrect(next iteration)
+        if cksQ is incorrect -> cksR is incorrect -> cksZ is incorrect(next iteration)
         
-        if cksZ* is incorrect -> cksP* is incorrect -> cksX is incorrect
+        if cksZ is incorrect -> cksP is incorrect -> cksX is incorrect
 
 4. check checksum of X and R, practicaly
 
-		step 3 is insufficient to detect all the error in all vectors
+        Assume no errors in proconditioning z = Br
+
+		step 3 is insufficient to detect errors in all vectors
 
 		add checking cksR

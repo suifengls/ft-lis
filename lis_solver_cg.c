@@ -141,8 +141,12 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 
 	// suifengls: ft-defined variables
 	int rank; // tmp
+	const LIS_INT CHECK_ITER = 15; // checking iteration
+	const LIS_INT ERROR_ITER = 0; // introduce error iteration, set to 0 = no error introduced
+	const LIS_INT CHKPT_ITER = 15; // checkpoint iteration
+	const LIS_SCALAR eps = 1e-10;
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank); // tmp
-	LIS_SCALAR eps = 1e-10, rerrX, rerrR;
+	LIS_SCALAR rerrX, rerrR;
 	LIS_INT locN, gloN;
 	LIS_VECTOR sumA, Ones;
 	LIS_SCALAR cksA, cksR, cksZ, cksP, cksQ, cksX, checksum;
@@ -200,6 +204,9 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	
 	for( iter=1; iter<=maxiter; iter++ )
 	{
+		// suifengls: introduce an error
+		if(!rank && iter == ERROR_ITER)
+			lis_vector_set_value(LIS_INS_VALUE, 0, 16, x); 
 		/* z = M^-1 * r */
 		times = lis_wtime();
 		lis_psolve(solver,r,z);
@@ -234,6 +241,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		
 		/* q = Ap */
 		LIS_MATVEC(A,p,q);
+
 		// suifengls: checksum Q
 		lis_vector_dot(p, sumA, &cksQ);
 		cksQ = cksQ + cksA * cksP;
@@ -261,7 +269,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		// suifengls: checking cksX
 		lis_vector_dot(Ones, x, &checksum);
 		rerrX = fabs(checksum - cksX)/fabs(cksX);
-		if(rerrX > eps && !rank)
+		if(iter % CHECK_ITER == 0 && rerrX > eps && !rank)
 		{
 			printf("========== error detected in X: %e at iteration %d ==========\n", rerrX, iter);
 			printf("sum of X = %e, checksum = %e\n", checksum, cksX);
@@ -275,7 +283,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		// suifengls: checking cksR
 		lis_vector_dot(Ones, r, &checksum);
 		rerrR = fabs(checksum - cksR)/fabs(cksR);
-		if((fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !rank)
+		if(iter % CHECK_ITER == 0 && (fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !rank)
 		{
 			printf("========== error detected in R: %e at iteration %d ==========\n", rerrR, iter);
 			printf("sum of R = %e, checksum = %e\n", checksum, cksR);
