@@ -142,7 +142,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	// suifengls: ft-defined variables
 	int rank; // tmp
 	const LIS_INT CHECK_ITER = 15; // checking iteration
-	const LIS_INT ERROR_ITER = 38; // introduce error iteration, set to 0 = no error introduced
+	const LIS_INT ERROR_ITER = 43; // introduce error iteration, set to 0 = no error introduced
 	const LIS_INT CHKPT_ITER = 15; // checkpoint iteration
 	const LIS_SCALAR eps = 1e-10;
 	LIS_INT flag = 0; // 1 - error detected, 0 - no error
@@ -279,8 +279,17 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		cksR = cksR - alpha * cksQ;
 		
 		rho_old = rho;
+
+		/* convergence check */
+		lis_solver_get_residual[conv](r,solver,&nrm2);
+		if( output )
+		{
+			if( output & LIS_PRINT_MEM ) solver->residual[iter] = nrm2;
+			if( output & LIS_PRINT_OUT && A->my_rank==0 ) lis_print_rhistory(iter,nrm2);
+		}
+		
 		//suifengls: checking, checkpointing, recovering
-		if(iter % CHECK_ITER == 0) 
+		if(nrm2 <= tol || iter % CHECK_ITER == 0) 
 		{
 			// suifengls: checking cksX
 			lis_vector_dot(Ones, x, &checksum);
@@ -305,7 +314,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 			}
 
 			// suifengls: checkpointing and recovery
-			if(!flag) // no error, make a checkpointing
+			if(!flag && nrm2 > tol) // no error, make a checkpointing
 			{
 				if(!rank)
 					printf("========== Checkpointing at itertion %d ==========\n", iter);
@@ -318,7 +327,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 				lis_vector_copy(x, ckpX);
 				ckpx = cksX;
 			}
-			else  // error detected, recovery!
+			else if(flag) // error detected, recovery!
 			{
 				if(!rank)
 					printf("========== Rollback to itertion %d ==========\n", ckpiter);
@@ -334,15 +343,6 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 				flag = 0;
 			}
 		}
-
-		/* convergence check */
-		lis_solver_get_residual[conv](r,solver,&nrm2);
-		if( output )
-		{
-			if( output & LIS_PRINT_MEM ) solver->residual[iter] = nrm2;
-			if( output & LIS_PRINT_OUT && A->my_rank==0 ) lis_print_rhistory(iter,nrm2);
-		}
-		
 		if( tol >= nrm2 )
 		{
 			solver->retcode    = LIS_SUCCESS;
