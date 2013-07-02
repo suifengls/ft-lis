@@ -142,7 +142,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	// suifengls: ft-defined variables
 	int rank; // tmp
 	const LIS_INT CHECK_ITER = 15; // checking iteration
-	const LIS_INT ERROR_ITER = 30; // introduce error iteration, set to 0 = no error introduced
+	const LIS_INT ERROR_ITER = 38; // introduce error iteration, set to 0 = no error introduced
 	const LIS_INT CHKPT_ITER = 15; // checkpoint iteration
 	const LIS_SCALAR eps = 1e-10;
 	LIS_INT flag = 0; // 1 - error detected, 0 - no error
@@ -211,19 +211,12 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	// initialize all checksum
 	cksR = 0.0, cksZ = 0.0, cksP = 0.0, cksQ = 0.0, cksX = 0.0, checksum = 0.0;
 	lis_vector_dot(Ones, r, &cksR);
+	lis_vector_dot(Ones, x, &cksX);
 	
 	flag = 0;  
 	num_error = 2;
 	for( iter=1; iter<=maxiter; iter++ )
 	{
-		// suifengls: introduce an error
-		if(!rank && iter == ERROR_ITER)
-		//if(num_error > 0 && !rank && iter == ERROR_ITER)
-		{
-			printf("========== Introducing an error at iteration %d.==========\n", iter);
-			lis_vector_set_value(LIS_INS_VALUE, 0, 16, x); 
-			num_error--;
-		}
 		/* z = M^-1 * r */
 		times = lis_wtime();
 		lis_psolve(solver,r,z);
@@ -251,6 +244,14 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		lis_vector_dot(p, sumA, &cksQ);
 		cksQ = cksQ + cksA * cksP;
 		
+		// suifengls: introduce an error
+		if(!rank && iter == ERROR_ITER)
+		//if(num_error > 0 && !rank && iter == ERROR_ITER)
+		{
+			printf("========== Introducing an error at iteration %d ==========\n", iter);
+			lis_vector_set_value(LIS_INS_VALUE, 0, 16, q); 
+			num_error--;
+		}
 		/* dot_pq = <p,q> */
 		lis_vector_dot(p,q,&dot_pq);
 
@@ -271,33 +272,68 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		lis_vector_axpy(alpha,p,x);
 		// suifengls: checksum X
 		cksX = cksX + alpha * cksP;
-		// suifengls: checking cksX
-		lis_vector_dot(Ones, x, &checksum);
-		rerrX = fabs(checksum - cksX)/fabs(cksX);
-		if(iter % CHECK_ITER == 0 && rerrX > eps && !flag)
-		{
-			flag = 1; // error detected!
-			if(!rank)
-				printf("========== error detected in X: %e at iteration %d ==========\n", rerrX, iter);
-			//printf("sum of X = %e, checksum = %e\n", checksum, cksX);
-		}
 		
 		/* r = r - alpha*q */
 		lis_vector_axpy(-alpha,q,r);
 		// suifengls: checksum R
 		cksR = cksR - alpha * cksQ;
 		
-		// suifengls: checking cksR
-		lis_vector_dot(Ones, r, &checksum);
-		rerrR = fabs(checksum - cksR)/fabs(cksR);
-		if(iter % CHECK_ITER == 0 && (fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !flag)
+		rho_old = rho;
+		//suifengls: checking, checkpointing, recovering
+		if(iter % CHECK_ITER == 0) 
 		{
-			flag = 1; // error detected!
-			if(!rank)
-				printf("========== error detected in R: %e at iteration %d ==========\n", rerrR, iter);
-			//printf("sum of R = %e, checksum = %e\n", checksum, cksR);
-		}
+			// suifengls: checking cksX
+			lis_vector_dot(Ones, x, &checksum);
+			rerrX = fabs(checksum - cksX)/fabs(cksX);
+			if(rerrX > eps && !flag)
+			{
+				flag = 1; // error detected!
+				if(!rank)
+					printf("========== error detected in X: %e at iteration %d ==========\n", rerrX, iter);
+				//printf("sum of X = %e, checksum = %e\n", checksum, cksX);
+			}
 
+			// suifengls: checking cksR
+			lis_vector_dot(Ones, r, &checksum);
+			rerrR = fabs(checksum - cksR)/fabs(cksR);
+			if(iter % CHECK_ITER == 0 && (fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !flag)
+			{
+				flag = 1; // error detected!
+				if(!rank)
+					printf("========== error detected in R: %e at iteration %d ==========\n", rerrR, iter);
+				//printf("sum of R = %e, checksum = %e\n", checksum, cksR);
+			}
+
+			// suifengls: checkpointing and recovery
+			if(!flag) // no error, make a checkpointing
+			{
+				if(!rank)
+					printf("========== Checkpointing at itertion %d ==========\n", iter);
+				ckpiter = iter;
+				ckprho = rho_old;
+				lis_vector_copy(r, ckpR);
+				ckpr = cksR;
+				lis_vector_copy(p, ckpP);
+				ckpp = cksP;
+				lis_vector_copy(x, ckpX);
+				ckpx = cksX;
+			}
+			else  // error detected, recovery!
+			{
+				if(!rank)
+					printf("========== Rollback to itertion %d ==========\n", ckpiter);
+				// rollback
+				//iter = ckpiter;
+				rho_old = ckprho;
+				lis_vector_copy(ckpR, r);
+				cksR = ckpr;
+				lis_vector_copy(ckpP, p);
+				cksP = ckpp;
+				lis_vector_copy(ckpX, x);
+				cksX = ckpx;
+				flag = 0;
+			}
+		}
 
 		/* convergence check */
 		lis_solver_get_residual[conv](r,solver,&nrm2);
@@ -315,40 +351,6 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 			solver->ptimes     = ptimes;
 			LIS_DEBUG_FUNC_OUT;
 			return LIS_SUCCESS;
-		}
-		rho_old = rho;
-
-		// suifengls: checkpointing and recovery
-		if(iter % CHECK_ITER == 0) 
-		{
-			if(!flag) // no error, make a checkpointing
-			{
-				if(!rank)
-					printf("Checkpointing at itertion %d.\n", iter);
-				ckpiter = iter;
-				ckprho = rho_old;
-				lis_vector_copy(r, ckpR);
-				ckpr = cksR;
-				lis_vector_copy(p, ckpP);
-				ckpp = cksP;
-				lis_vector_copy(x, ckpX);
-				ckpx = cksX;
-			}
-			else  // error detected, recovery!
-			{
-				if(!rank)
-					printf("Rollback to itertion %d!\n", ckpiter);
-				// rollback
-				//iter = ckpiter;
-				rho_old = ckprho;
-				lis_vector_copy(ckpR, r);
-				cksR = ckpr;
-				lis_vector_copy(ckpP, p);
-				cksP = ckpp;
-				lis_vector_copy(ckpX, x);
-				cksX = ckpx;
-				flag = 0;
-			}
 		}
 	}
 
