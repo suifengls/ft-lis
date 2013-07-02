@@ -88,8 +88,8 @@ LIS_INT lis_cg_malloc_work(LIS_SOLVER solver)
 
 	LIS_DEBUG_FUNC_IN;
 
-	// suifengls: extra work vectors
-	worklen = NWORK + 2;
+	// suifengls: extra work vectors 2 = Ones + sumA, 3 = ckpR, ckpP, ckpX
+	worklen = NWORK + 2 + 3;
 	work    = (LIS_VECTOR *)lis_malloc( worklen*sizeof(LIS_VECTOR),"lis_cg_malloc_work::work" );
 	if( work==NULL )
 	{
@@ -145,11 +145,14 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	const LIS_INT ERROR_ITER = 0; // introduce error iteration, set to 0 = no error introduced
 	const LIS_INT CHKPT_ITER = 15; // checkpoint iteration
 	const LIS_SCALAR eps = 1e-10;
+	LIS_INT flag = 0; // 1 - error detected, 0 - no error
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank); // tmp
 	LIS_SCALAR rerrX, rerrR;
 	LIS_INT locN, gloN;
 	LIS_VECTOR sumA, Ones;
+	LIS_VECTOR ckpR, ckpP, ckpX;
 	LIS_SCALAR cksA, cksR, cksZ, cksP, cksQ, cksX, checksum;
+	LIS_SCALAR ckprho = 0.0;
 
 	LIS_DEBUG_FUNC_IN;
 
@@ -174,6 +177,10 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	// suifengls: allocate extra vectors
 	sumA	= solver->work[4];
 	Ones	= solver->work[5];
+	// suifengls: allocate checkpoint vectors
+	ckpR	= solver->work[6];
+	ckpP	= solver->work[7];
+	ckpX	= solver->work[8];
 	// get the global size of matrix A
 	lis_matrix_get_size(A, &locN, &gloN);
 
@@ -202,6 +209,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	cksR = 0.0, cksZ = 0.0, cksP = 0.0, cksQ = 0.0, cksX = 0.0, checksum = 0.0;
 	lis_vector_dot(Ones, r, &cksR);
 	
+	flag = 0;  
 	for( iter=1; iter<=maxiter; iter++ )
 	{
 		// suifengls: introduce an error
@@ -215,19 +223,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		// assuming no error in precondition
 		// suifengls: checksum Z
 		lis_vector_dot(Ones, z, &cksZ);
-		/*
-		// suifengls: introduce an error
-		if(!rank && iter == 8)
-			lis_vector_set_value(LIS_INS_VALUE, 0, 100, r); 
-		lis_vector_dot(Ones, z, &checksum);
-		rerrX = fabs(checksum - cksZ)/fabs(cksZ);
-		if(!rank)
-			printf("sum of Z = %e, checksum = %e\n", checksum, cksZ);
-		if(rerrX > eps && !rank)
-		{
-			printf("========== error detected in Z: %e ==========\n", rerrX);
-		}
-		*/
+
 		/* rho = <r,z> */
 		lis_vector_dot(r,z,&rho);
 
@@ -269,10 +265,12 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		// suifengls: checking cksX
 		lis_vector_dot(Ones, x, &checksum);
 		rerrX = fabs(checksum - cksX)/fabs(cksX);
-		if(iter % CHECK_ITER == 0 && rerrX > eps && !rank)
+		if(iter % CHECK_ITER == 0 && rerrX > eps)
 		{
-			printf("========== error detected in X: %e at iteration %d ==========\n", rerrX, iter);
-			printf("sum of X = %e, checksum = %e\n", checksum, cksX);
+			flag = 1; // error detected!
+			if(!rank)
+				printf("========== error detected in X: %e at iteration %d ==========\n", rerrX, iter);
+			//printf("sum of X = %e, checksum = %e\n", checksum, cksX);
 		}
 		
 		/* r = r - alpha*q */
@@ -283,10 +281,33 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		// suifengls: checking cksR
 		lis_vector_dot(Ones, r, &checksum);
 		rerrR = fabs(checksum - cksR)/fabs(cksR);
-		if(iter % CHECK_ITER == 0 && (fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !rank)
+		if(iter % CHECK_ITER == 0 && (fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps)
 		{
-			printf("========== error detected in R: %e at iteration %d ==========\n", rerrR, iter);
-			printf("sum of R = %e, checksum = %e\n", checksum, cksR);
+			flag = 1; // error detected!
+			if(!rank)
+				printf("========== error detected in R: %e at iteration %d ==========\n", rerrR, iter);
+			//printf("sum of R = %e, checksum = %e\n", checksum, cksR);
+		}
+
+		// suifengls: checkpointing and recovery
+		if(iter % CHECK_ITER == 0) 
+		{
+			if(!flag) // no error, make a checkpointing
+			{
+				ckprho = rho_old;
+				lis_vector_copy(r, ckpR);
+				lis_vector_copy(p, ckpP);
+				lis_vector_copy(x, ckpX);
+			}
+			else  // error detected, recovery!
+			{
+				// rollback
+				rho_old;
+				lis_vector_copy(ckpR, r);
+				lis_vector_copy(ckpP, p);
+				lis_vector_copy(ckpX, c);
+				flag = 0;
+			}
 		}
 
 		/* convergence check */
@@ -307,6 +328,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 			return LIS_SUCCESS;
 		}
 		rho_old = rho;
+
 	}
 
 	solver->retcode   = LIS_MAXITER;
