@@ -1,3 +1,9 @@
+/**********************************************************************
+* Author        :   suifengls
+* E-mail        :   suifengls@gmail.com 
+* Last modified :   2013-07-02 21:45
+* Description   :   Fault Tolerant Conjugate Gradient
+**********************************************************************/
 /* Copyright (C) The Scalable Software Infrastructure Project. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -206,8 +212,7 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	lis_vector_axpy(-cksA/(gloN+1), Ones, sumA);
 	// cksA = sum of sumA
 	lis_vector_dot(Ones, sumA, &cksA);
-	//printf("AN = %d, cksA = %e\n", gloN, cksA);
-	lis_output_vector(sumA, LIS_FMT_MM, "sumA");
+	//lis_output_vector(sumA, LIS_FMT_MM, "sumA");
 	// initialize all checksum
 	cksR = 0.0, cksZ = 0.0, cksP = 0.0, cksQ = 0.0, cksX = 0.0, checksum = 0.0;
 	lis_vector_dot(Ones, r, &cksR);
