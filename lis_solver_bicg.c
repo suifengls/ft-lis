@@ -96,7 +96,8 @@ LIS_INT lis_bicg_malloc_work(LIS_SOLVER solver)
 	if( err ) return err;
 	*/
 
-	worklen = NWORK;
+	// suifengls: allocate extra vectors 3 = Ones + sumA + sumAt
+	worklen = NWORK + 3;
 	work    = (LIS_VECTOR *)lis_malloc( worklen*sizeof(LIS_VECTOR),"lis_bicg_malloc_work::work" );
 	if( work==NULL )
 	{
@@ -146,7 +147,24 @@ LIS_INT lis_bicg(LIS_SOLVER solver)
 	LIS_INT iter,maxiter,n,output,conv;
 	double times,ptimes;
 
+	// suifengls: ft-defined variables
+	int rank;
+	const LIS_INT CHECK_ITER = 15;
+	const LIS_INT REEOR_ITER = 43;
+	const LIS_INT CHKPT_ITER = 15;
+	const LIS_SCALAR eps = 1e-10;
+	LIS_INT flag = 0;
+	LIS_SCALAR rerrX, rerrR;
+	LIS_INT localN, globalN;
+	LIS_VECTOR sumA, sumAt, Ones;
+	LIS_SCALAR cksA, cksAt, cksR, cksRt, cksZ, cksZt, cksP, cksPt, cksQ, cksQt, cksX, checksum;
+	// suifengls: checkpointing variable
+	// TBD
+
+
 	LIS_DEBUG_FUNC_IN;
+
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
 	A       = solver->A;
 	At      = solver->A;
@@ -169,6 +187,12 @@ LIS_INT lis_bicg(LIS_SOLVER solver)
 	qtld    = solver->work[3];
 	rho_old = (LIS_SCALAR)1.0;
 
+	// suifengls: assign working vectors
+	Ones	= solver->work[6];
+	sumA	= solver->work[7];
+	sumAt	= solver->work[8];
+	// suifengls: get global size of A
+	lis_matrix_get_size(A, &localN, &globalN);
 
 
 	/* Initial Residual */
@@ -184,6 +208,25 @@ LIS_INT lis_bicg(LIS_SOLVER solver)
 	lis_vector_set_all(0, p);
 	lis_vector_set_all(0, ptld);
 
+	// suifengls: initialize all checksum
+	// checksum of A
+	lis_vector_set_all(1.0, Ones);
+	lis_matvec(A, Ones, sumAt);
+	lis_matvect(At, Ones, sumA);
+	lis_vector_dot(Ones, sumA, &cksA);
+	cksAt = cksA;
+	lis_vector_axpy(-cksA/(globalN+1), Ones, sumA);
+	lis_vector_axpy(-cksAt/(globalN+1), Ones, sumAt);
+	lis_vector_dot(Ones, sumA, &cksA);
+	lis_vector_dot(Ones, sumAt, &cksAt);
+	// checksum of others
+	cksZ = 0.0, cksZt = 0.0, cksP = 0.0, cksPt = 0.0, cksQ = 0.0, cksQt = 0.0, checksum = 0.0;
+	lis_vector_dot(Ones, x, &cksX);
+	lis_vector_dot(Ones, r, &cksR);
+	lis_vector_dot(Ones, rtld, &cksRt);
+
+	flag = 0;
+
 	for( iter=1; iter<=maxiter; iter++ )
 	{
 		/* z    = M^-1 * r */
@@ -192,6 +235,10 @@ LIS_INT lis_bicg(LIS_SOLVER solver)
 		lis_psolve(solver, r, z);
 		lis_psolvet(solver, rtld, ztld);
 		ptimes += lis_wtime()-times;
+
+		// suifengls: checksum Z and Ztld
+		lis_vector_dot(Ones, z, &cksZ);
+		lis_vector_dot(Ones, ztld, &cksZt);
 
 		/* rho = <z,rtld> */
 		lis_vector_dot(z,rtld,&rho);
@@ -216,10 +263,24 @@ LIS_INT lis_bicg(LIS_SOLVER solver)
 		/* q    = A   * p    */
 		/* qtld = A^T * ptld */
 		lis_vector_xpay(z,beta,p);
+		// suifengls: checksum P
+		cksP = cksZ + beta * cksP;
+		// suifengls: checking checksum
+		lis_vector_dot(Ones, p, &checksum);
+		if(!rank)
+			printf("sum = %e, cks = %e\n", checksum, cksP);
 		LIS_MATVEC(A,p,q);
+		// suifengls: checksum Q
+		lis_vector_dot(p, sumA, &cksQ);
+		cksQ = cksQ + cksP * cksZ;
 
 		lis_vector_xpay(ztld,beta,ptld);
+		// suifengls: checksum Ptld
+		cksPt = cksZt + beta * cksPt;
 		LIS_MATVECT(At,ptld,qtld);
+		// suifengls: checksum Qtld
+		lis_vector_dot(ptld, sumAt, &cksQt);
+		cksQt = cksQt + cksPt * cksZt;
 
 		
 		/* tmpdot1 = <ptld,q> */
@@ -241,9 +302,13 @@ LIS_INT lis_bicg(LIS_SOLVER solver)
 		
 		/* x = x + alpha*p */
 		lis_vector_axpy(alpha,p,x);
-		
+		// suifengls: checksum X
+		cksX = cksX + alpha * cksP;
+
 		/* r    = r    - alpha*q    */
 		lis_vector_axpy(-alpha,q,r);
+		// suifengls: checksum R
+		cksR = cksR - alpha * cksQ;
 		
 		/* convergence check */
 		lis_solver_get_residual[conv](r,solver,&nrm2);
@@ -266,6 +331,8 @@ LIS_INT lis_bicg(LIS_SOLVER solver)
 		
 		/* rtld = rtld - alpha*qtld */
 		lis_vector_axpy(-alpha,qtld,rtld);
+		// suifengls: checksum Rtld
+		cksRt = cksRt - alpha * cksQt;
 
 		rho_old = rho;
 	}
