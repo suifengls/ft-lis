@@ -1,7 +1,7 @@
 FT-LIS (private)
 ========
 
-Falut-Tolerant LIS
+Fault-Tolerant LIS
 
 Work harder for PPoPP 09/01/2013
 
@@ -34,19 +34,19 @@ Conjugate Gradient(CG)
 
 2. checksum relationship map:
 
-        checksum X *------ checksum P *------ checksum Z
-                                |
-                                *
-        checksum R *------ checksum Q
+        checksum X *--- checksum P *--- checksum Z
+                            |
+                            *
+        checksum R *--- checksum Q
 
 3. check checksum X only, ideally
 
-        cksQ is incorrect -> cksR is incorrect -> cksZ is incorrect(next iteration)     
-        cksZ is incorrect -> cksP is incorrect -> cksX is incorrect
+        cksQ incorrect -> cksR incorrect -> cksZ incorrect(next iteration)     
+        cksZ incorrect -> cksP incorrect -> cksX incorrect
 
-4. check checksum of X and R, practicaly
+4. check checksum of X and R, practically
 
-        Assume no errors in proconditioning z = Br
+        Assume no errors in preconditioning z = Br
 		step 3 is insufficient to detect errors in all vectors
 		so, add checking cksR
 
@@ -59,6 +59,7 @@ BiConjugate Gradient (BiCG)
 		 rho(-1) = 1
 		 p(0)    = (0,...,0)^T
 		 ptld(0) = (0,...,0)^T
+		 ----------------------------------------
 		 for k=1,2,...
 		   z(k-1)    = M^-1 * r(k-1)
 		   ztld(k-1) = M^-T * rtld(k-1)
@@ -74,3 +75,30 @@ BiConjugate Gradient (BiCG)
 		   r(k)      = r(k-1) - alpha*q(k)
 		   rtld(k)   = rtld(k-1) - alpha*qtld(k)
 		 ----------------------------------------
+1. vector relationship:
+
+        z    = M^(-1) * r
+        ztld = M^(-1) * rtld
+        p    = z + beta * p
+        ptld = ztld + beta * ptld
+        q    = A * p
+        qtld = At * ptld
+        x    = x + aplha * p
+        r    = r - aplha * q
+        rtld = rtld - alpha * qtld
+        
+2. checksum relationship map:
+
+        1. checksum X *--- checksum P *--- checksum Z
+                               |
+                               *
+           checksum R *--- checksum Q
+        
+        2. checksum Rt *--- checksum Qt *--- checksum Pt *--- checksum Zt 
+          
+3. check checksum of X, R, and Rt         
+
+        1. cksQ incorrect -> cksR incorrect -> cksZ incorrect(next iteration)     
+           cksZ incorrect -> cksP incorrect -> cksX incorrect
+        2. cksZt incorrect -> cksPt incorrect -> cksQt incorrect -> cksRt incorrect
+     
