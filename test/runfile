@@ -1,0 +1,1 @@
+rm test4; make test4; mpiexec -n 5 ./test4 -i cg -maxiter 5000 > output; vim output
