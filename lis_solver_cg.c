@@ -40,6 +40,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #ifdef HAVE_MALLOC_H
         #include <malloc.h>
 #endif
@@ -303,18 +304,18 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 			{
 				flag = 1; // error detected!
 				if(!rank)
-					printf("========== error detected in X: %e at iteration %d ==========\n", rerrX, iter);
+					printf("========== Error detected in X: %e at iteration %d ==========\n", rerrX, iter);
 				//printf("sum of X = %e, checksum = %e\n", checksum, cksX);
 			}
 
 			// suifengls: checking cksR
 			lis_vector_dot(Ones, r, &checksum);
 			rerrR = fabs(checksum - cksR)/fabs(cksR);
-			if(iter % CHECK_ITER == 0 && (fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !flag)
+			if((fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !flag)
 			{
 				flag = 1; // error detected!
 				if(!rank)
-					printf("========== error detected in R: %e at iteration %d ==========\n", rerrR, iter);
+					printf("========== Error detected in R: %e at iteration %d ==========\n", rerrR, iter);
 				//printf("sum of R = %e, checksum = %e\n", checksum, cksR);
 			}
 
