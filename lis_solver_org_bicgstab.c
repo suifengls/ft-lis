@@ -1,9 +1,3 @@
-/**********************************************************************
-* Author        :   suifengls
-* E-mail        :   suifengls@gmail.com 
-* Last modified :   2013-07-07 23:13
-* Description   :   Fault-Tolerant BiCGSATB 
-**********************************************************************/
 /* Copyright (C) The Scalable Software Infrastructure Project. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -40,7 +34,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #ifdef HAVE_MALLOC_H
         #include <malloc.h>
 #endif
@@ -102,8 +95,7 @@ LIS_INT lis_bicgstab_malloc_work(LIS_SOLVER solver)
 
 	LIS_DEBUG_FUNC_IN;
 
-	// suifengls: allocate extra working vecotr: 2 = sumA + Ones
-	worklen = NWORK + 2;
+	worklen = NWORK;
 	work    = (LIS_VECTOR *)lis_malloc( worklen*sizeof(LIS_VECTOR),"lis_bicgstab_malloc_work::work" );
 	if( work==NULL )
 	{
@@ -153,24 +145,8 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	LIS_INT iter,maxiter,n,output,conv;
 	double times,ptimes;
 
-	// suifengls: ft-defined variables
-	int rank;
-	const LIS_INT CHECK_ITER = 15;
-	const LIS_INT ERROR_ITER = 43;
-	const LIS_INT CHKPT_ITER = 15;
-	const LIS_SCALAR eps = 1e-10;
-	LIS_INT flag = 0;
-	LIS_SCALAR rerrX, rerrR;  // to add more
-	LIS_INT localN, globalN;
-	LIS_VECTOR sumA, Ones;
-	LIS_SCALAR cksA, cksR, cksRt, cksP, cksV, cksPh, cksS, cksSh, cksT, cksX, checksum;
-	// suifengls: checkpointing variables
-	// TBD
-
-
 	LIS_DEBUG_FUNC_IN;
 
-	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 	A       = solver->A;
 	M       = solver->precon;
 	b       = solver->b;
@@ -182,7 +158,6 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	ptimes  = 0.0;
 
 	rtld    = solver->work[0];
-	// suifengls: r and t share the same work vector
 	r       = solver->work[1];
 	s       = solver->work[1];
 	t       = solver->work[2];
@@ -193,12 +168,6 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	alpha   = (LIS_SCALAR)1.0;
 	omega   = (LIS_SCALAR)1.0;
 	rho_old = (LIS_SCALAR)1.0;
-
-	// suifengls: assign vectors
-	sumA	= solver->work[7];
-	Ones	= solver->work[8];
-
-	lis_matrix_get_size(A, &localN, &globalN);
 
 	lis_vector_set_all(0.0,p);
 	lis_vector_set_all(0.0,phat);
@@ -215,20 +184,6 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 
 	lis_solver_set_shadowresidual(solver,r,rtld);
 
-	// suifengls: initialze all checksums
-	lis_vector_set_all(1.0, Ones);
-	// At * Ones to get column sum
-	lis_matvect(A, Ones, sumA);
-	lis_vector_dot(Ones, sumA, &cksA);
-	lis_vector_axpy(-cksA/(globalN+1), Ones, sumA);
-	lis_vector_dot(Ones, sumA, &cksA);
-	// other checksums
-	cksP = 0.0, cksV = 0.0, cksPh = 0.0, cksS = 0.0, cksSh = 0.0, cksT =0.0, checksum = 0.0;
-	lis_vector_dot(Ones, x, &cksX);
-	lis_vector_dot(Ones, r, &cksR);
-	lis_vector_dot(Ones, rtld, &cksRt);
-	
-	flag = 0;
 	
 	for( iter=1; iter<=maxiter; iter++ )
 	{
@@ -248,8 +203,6 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		if( iter==1 )
 		{
 			lis_vector_copy(r,p);
-			// suifengls: checksum P
-			cksP = cksR;
 		}
 		else
 		{
@@ -259,22 +212,15 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 			/* p = r + beta*(p - omega*v) */
 			lis_vector_axpy(-omega,v,p);
 			lis_vector_xpay(r,beta,p);
-			// suifengls: checksum P
-			cksP = cksR + beta * (cksP - omega * cksV);
 		}
 		
 		/* phat = M^-1 * p */
 		times = lis_wtime();
 		lis_psolve(solver, p, phat);
 		ptimes += lis_wtime()-times;
-		// suifengls: checksum Phat, no error
-		lis_vector_dot(Ones, phat, &cksPh);
 
 		/* v = A * phat */
 		LIS_MATVEC(A,phat,v);
-		// suifengls: checksum V
-		lis_vector_dot(phat, sumA, &cksV);
-		cksV = cksV + cksA * cksPh;
 
 		/* tmpdot1 = <rtld,v> */
 		lis_vector_dot(rtld,v,&tmpdot1);
@@ -286,8 +232,6 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		
 		/* s = r - alpha*v */
 		lis_vector_axpy(-alpha,v,r);
-		// suifengls: checksum S
-		cksS = cksR - alpha * cksV;
 
 		/* Early check for tolerance */
 		lis_solver_get_residual[conv](s,solver,&nrm2);
@@ -314,14 +258,9 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		times = lis_wtime();
 		lis_psolve(solver, s, shat);
 		ptimes += lis_wtime()-times;
-		// suifengls: checksum Shat, no error
-		lis_vector_dot(Ones, shat, &cksSh);
 
 		/* t = A * shat */
 		LIS_MATVEC(A,shat,t);
-		// suifengls: checksum V
-		lis_vector_dot(shat, sumA, &cksT);
-		cksT = cksT + cksA * cksSh;
 
 		/* tmpdot1 = <t,s> */
 		/* tmpdot2 = <t,t> */
@@ -333,13 +272,9 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		/* x = x + alpha*phat + omega*shat */
 		lis_vector_axpy(alpha,phat,x);
 		lis_vector_axpy(omega,shat,x);
-		// suifengls: checksum X
-		cksX = cksX + alpha * cksPh + omega * cksSh;
 		
 		/* r = s - omega*t */
 		lis_vector_axpy(-omega,t,r);
-		// suifengls: checksum R
-		cksR = cksS - omega * cksT;
 		
 		/* convergence check */
 		lis_solver_get_residual[conv](r,solver,&nrm2);
