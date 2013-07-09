@@ -102,8 +102,8 @@ LIS_INT lis_bicgstab_malloc_work(LIS_SOLVER solver)
 
 	LIS_DEBUG_FUNC_IN;
 
-	// suifengls: allocate extra working vecotr: 2 = sumA + Ones
-	worklen = NWORK + 2;
+	// suifengls: allocate extra working vecotr: 2 = sumA + Ones, 4 = ckpX + ckpP + ckpR + ckpV
+	worklen = NWORK + 2 + 4;
 	work    = (LIS_VECTOR *)lis_malloc( worklen*sizeof(LIS_VECTOR),"lis_bicgstab_malloc_work::work" );
 	if( work==NULL )
 	{
@@ -158,15 +158,16 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	const LIS_INT CHECK_ITER = 15;
 	const LIS_INT ERROR_ITER = 43;
 	const LIS_INT CHKPT_ITER = 15;
-	const LIS_SCALAR eps = 1e-10;
+	const LIS_SCALAR eps = 1e-10, epsT = 1e-6;
 	LIS_INT flag = 0;
-	LIS_SCALAR rerrX, rerrR;  // to add more
+	LIS_SCALAR rerrX, rerrP, rerrT;  // to add more
 	LIS_INT localN, globalN;
 	LIS_VECTOR sumA, Ones;
-	LIS_SCALAR cksA, cksR, cksRt, cksP, cksV, cksPh, cksS, cksSh, cksT, cksX, checksum;
+	LIS_SCALAR cksA, cksR, cksP, cksV, cksPh, cksS, cksSh, cksT, cksX, checksum;
 	// suifengls: checkpointing variables
-	// TBD
-
+	LIS_VECTOR ckpX, ckpR, ckpP, ckpV;
+	LIS_SCALAR ckpx, ckpr, ckpp, ckpv, ckprho = 0.0, ckpalpha = 0.0, ckpomega = 0.0;
+	LIS_INT ckpiter = 0;
 
 	LIS_DEBUG_FUNC_IN;
 
@@ -197,6 +198,11 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	// suifengls: assign vectors
 	sumA	= solver->work[7];
 	Ones	= solver->work[8];
+	// suifengls: assign ckp vectors
+	ckpP	= solver->work[9];
+	ckpR	= solver->work[10];
+	ckpX	= solver->work[11];
+	ckpV	= solver->work[12];
 
 	lis_matrix_get_size(A, &localN, &globalN);
 
@@ -226,12 +232,12 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	cksP = 0.0, cksV = 0.0, cksPh = 0.0, cksS = 0.0, cksSh = 0.0, cksT =0.0, checksum = 0.0;
 	lis_vector_dot(Ones, x, &cksX);
 	lis_vector_dot(Ones, r, &cksR);
-	lis_vector_dot(Ones, rtld, &cksRt);
 	
 	flag = 0;
 	
 	for( iter=1; iter<=maxiter; iter++ )
 	{
+
 		/* rho = <rtld,r> */
 		lis_vector_dot(rtld,r,&rho);
 
@@ -275,6 +281,12 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		// suifengls: checksum V
 		lis_vector_dot(phat, sumA, &cksV);
 		cksV = cksV + cksA * cksPh;
+		/*
+		// checking test
+		lis_vector_dot(Ones, t, &checksum);
+		if(!rank)
+		printf("sum = %20.18e, cks = %20.18e\n", checksum, cksT);
+		*/
 
 		/* tmpdot1 = <rtld,v> */
 		lis_vector_dot(rtld,v,&tmpdot1);
@@ -286,8 +298,9 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		
 		/* s = r - alpha*v */
 		lis_vector_axpy(-alpha,v,r);
-		// suifengls: checksum S
-		cksS = cksR - alpha * cksV;
+		// suifengls: checksum S, very close to ZERO !!!
+		// cksS = cksR - alpha * cksV;
+		lis_vector_dot(Ones, r, &cksS);
 
 		/* Early check for tolerance */
 		lis_solver_get_residual[conv](s,solver,&nrm2);
@@ -319,9 +332,17 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 
 		/* t = A * shat */
 		LIS_MATVEC(A,shat,t);
-		// suifengls: checksum V
+		// suifengls: checksum T
 		lis_vector_dot(shat, sumA, &cksT);
 		cksT = cksT + cksA * cksSh;
+		
+		// suifengls: introduce an error
+		if(!rank && iter == ERROR_ITER)
+		{
+			printf("========== Introducing an error at iteration %d ==========\n", iter);
+			lis_vector_set_value(LIS_INS_VALUE, 0, -16, t);
+		}
+		
 
 		/* tmpdot1 = <t,s> */
 		/* tmpdot2 = <t,t> */
@@ -341,6 +362,8 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		// suifengls: checksum R
 		cksR = cksS - omega * cksT;
 		
+		rho_old = rho;
+
 		/* convergence check */
 		lis_solver_get_residual[conv](r,solver,&nrm2);
 /*		lis_vector_nrm2(r,&nrm2);
@@ -350,6 +373,77 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		{
 			if( output & LIS_PRINT_MEM ) solver->residual[iter] = nrm2;
 			if( output & LIS_PRINT_OUT && A->my_rank==0 ) lis_print_rhistory(iter,nrm2);
+		}
+
+		// suifengls: checking, checkpointing, recovering
+		if(nrm2 <= tol || iter % CHECK_ITER == 0)
+		{
+			// suifengls: checking checksum X
+			lis_vector_dot(Ones, x, &checksum);
+			rerrX = fabs(checksum - cksX)/fabs(cksX);
+			if(rerrX > eps && !flag)
+			{
+				flag = 1;
+				if(!rank)
+					printf("==========Error detected in X: %e at iteration %d\n", rerrX, iter);
+			}
+			
+			// suifengls: checking checksum P
+			lis_vector_dot(Ones, p, &checksum);
+			rerrP = fabs(checksum - cksP)/fabs(cksP);
+			if(rerrP > eps && !flag)
+			{
+				flag = 1;
+				if(!rank)
+					printf("==========Error detected in P: %e at iteration %d\n", rerrP, iter);
+			}
+
+			// suifengls: checking checksum T
+			lis_vector_dot(Ones, t, &checksum);
+			rerrT = fabs(checksum - cksT)/fabs(cksT);
+			if(rerrT > eps && !flag)
+			{
+				flag = 1;
+				if(!rank)
+					printf("==========Error detected in T: %e at iteration %d\n", rerrT, iter);
+			}
+			
+			// suifengls: checkpointing and recover
+			if(!flag && nrm2 > tol)  // no error and not the last iteration
+			{
+				if(!rank)
+					printf("========== Checkpointing at iteration %d ==========\n", iter);
+				ckpiter = iter;
+				ckprho = rho_old;
+				ckpalpha = alpha;
+				ckpomega = omega;
+				lis_vector_copy(r, ckpR);
+				ckpr = cksR;
+				lis_vector_copy(p, ckpP);
+				ckpp = cksP;
+				lis_vector_copy(x, ckpX);
+				ckpx = cksX;
+				lis_vector_copy(v, ckpV);
+				ckpv = cksV;
+			}
+			else if(flag) // recovering
+			{
+				if(!rank)
+					printf("========== Rollback to iteration %d ==========\n", ckpiter);
+				//iter = ckpiter;
+				rho_old = ckprho;
+				alpha = ckpalpha;
+				omega = ckpomega;
+				lis_vector_copy(ckpR, r);
+				cksR = ckpr;
+				lis_vector_copy(ckpP, p);
+				cksP = ckpp;
+				lis_vector_copy(ckpX, x);
+				cksX = ckpx;
+				lis_vector_copy(ckpV, v);
+				cksV = ckpv;
+				flag = 0;
+			}
 		}
 
 		if( tol >= nrm2 )
@@ -370,7 +464,6 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 			LIS_DEBUG_FUNC_OUT;
 			return LIS_BREAKDOWN;
 		}
-		rho_old = rho;
 	}
 
 	solver->retcode   = LIS_MAXITER;
