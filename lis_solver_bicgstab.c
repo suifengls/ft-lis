@@ -144,7 +144,7 @@ LIS_INT lis_bicgstab_malloc_work(LIS_SOLVER solver)
 #define __FUNC__ "lis_bicgstab"
 LIS_INT lis_bicgstab(LIS_SOLVER solver)
 {
-	LIS_MATRIX A;
+        LIS_MATRIX A;
 	LIS_PRECON M;
 	LIS_VECTOR b,x;
 	LIS_VECTOR r,rtld, t,p,v, s, phat, shat;
@@ -172,6 +172,7 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	LIS_DEBUG_FUNC_IN;
 
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
+	//	At      = solver->A;
 	A       = solver->A;
 	M       = solver->precon;
 	b       = solver->b;
@@ -183,7 +184,7 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	ptimes  = 0.0;
 
 	rtld    = solver->work[0];
-	// suifengls: r and t share the same work vector
+	// suifengls: r and s share the same work vector
 	r       = solver->work[1];
 	s       = solver->work[1];
 	t       = solver->work[2];
@@ -203,7 +204,7 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	ckpR	= solver->work[10];
 	ckpX	= solver->work[11];
 	ckpV	= solver->work[12];
-
+	// get global size of A
 	lis_matrix_get_size(A, &localN, &globalN);
 
 	lis_vector_set_all(0.0,p);
@@ -234,10 +235,8 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 	lis_vector_dot(Ones, r, &cksR);
 	
 	flag = 0;
-	
 	for( iter=1; iter<=maxiter; iter++ )
 	{
-
 		/* rho = <rtld,r> */
 		lis_vector_dot(rtld,r,&rho);
 
@@ -251,6 +250,13 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 			return LIS_BREAKDOWN;
 		}
 
+		// suifengls: introduce an error
+		if(!rank && iter == ERROR_ITER)
+		{
+			printf("========== Introducing an error at iteration %d ==========\n", iter);
+			//lis_vector_set_value(LIS_INS_VALUE, 0, 16, v);
+		}
+		
 		if( iter==1 )
 		{
 			lis_vector_copy(r,p);
@@ -281,12 +287,11 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		// suifengls: checksum V
 		lis_vector_dot(phat, sumA, &cksV);
 		cksV = cksV + cksA * cksPh;
-		/*
-		// checking test
-		lis_vector_dot(Ones, t, &checksum);
+
+		// suifengls: checking test
+		lis_vector_dot(Ones, v, &checksum);
 		if(!rank)
-		printf("sum = %20.18e, cks = %20.18e\n", checksum, cksT);
-		*/
+		  printf("sum = %10.8e, cks = %10.8e, rel = %10.8e\n", checksum, cksV, fabs(checksum-cksV)/fabs(cksV));
 
 		/* tmpdot1 = <rtld,v> */
 		lis_vector_dot(rtld,v,&tmpdot1);
@@ -296,7 +301,7 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		/* alpha = rho / tmpdot1 */
 		alpha = rho / tmpdot1;
 		
-		/* s = r - alpha*v */
+		/* s = r - alpha*v, (s = r)*/
 		lis_vector_axpy(-alpha,v,r);
 		// suifengls: checksum S, very close to ZERO !!!
 		// cksS = cksR - alpha * cksV;
@@ -336,14 +341,6 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		lis_vector_dot(shat, sumA, &cksT);
 		cksT = cksT + cksA * cksSh;
 		
-		// suifengls: introduce an error
-		if(!rank && iter == ERROR_ITER)
-		{
-			printf("========== Introducing an error at iteration %d ==========\n", iter);
-			lis_vector_set_value(LIS_INS_VALUE, 0, -16, t);
-		}
-		
-
 		/* tmpdot1 = <t,s> */
 		/* tmpdot2 = <t,t> */
 		/* omega   = tmpdot1 / tmpdot2 */
@@ -357,7 +354,7 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 		// suifengls: checksum X
 		cksX = cksX + alpha * cksPh + omega * cksSh;
 		
-		/* r = s - omega*t */
+		/* r = s - omega*t, (s = r) */
 		lis_vector_axpy(-omega,t,r);
 		// suifengls: checksum R
 		cksR = cksS - omega * cksT;
@@ -385,7 +382,7 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 			{
 				flag = 1;
 				if(!rank)
-					printf("==========Error detected in X: %e at iteration %d\n", rerrX, iter);
+					printf("========== Error detected in X: %e at iteration %d\n", rerrX, iter);
 			}
 			
 			// suifengls: checking checksum P
@@ -395,9 +392,9 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 			{
 				flag = 1;
 				if(!rank)
-					printf("==========Error detected in P: %e at iteration %d\n", rerrP, iter);
+					printf("========== Error detected in P: %e at iteration %d\n", rerrP, iter);
 			}
-
+			/*
 			// suifengls: checking checksum T
 			lis_vector_dot(Ones, t, &checksum);
 			rerrT = fabs(checksum - cksT)/fabs(cksT);
@@ -407,7 +404,7 @@ LIS_INT lis_bicgstab(LIS_SOLVER solver)
 				if(!rank)
 					printf("==========Error detected in T: %e at iteration %d\n", rerrT, iter);
 			}
-			
+			*/
 			// suifengls: checkpointing and recover
 			if(!flag && nrm2 > tol)  // no error and not the last iteration
 			{
