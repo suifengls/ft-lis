@@ -34,6 +34,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #ifdef HAVE_MALLOC_H
         #include <malloc.h>
 #endif
@@ -92,7 +93,8 @@ LIS_INT lis_cgs_malloc_work(LIS_SOLVER solver)
 
 	LIS_DEBUG_FUNC_IN;
 
-	worklen = NWORK;
+	// suifengls: extar working vectors, 2 = Ones + sumA
+	worklen = NWORK + 2;
 	work    = (LIS_VECTOR *)lis_malloc( worklen*sizeof(LIS_VECTOR),"lis_cgs_malloc_work::work" );
 	if( work==NULL )
 	{
@@ -141,8 +143,21 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 	LIS_REAL   bnrm2, nrm2, tol;
 	LIS_INT iter,maxiter,n,output,conv;
 	double times,ptimes;
+	// suifengls: ft defined variables
+	int rank;
+	const LIS_INT CHECK_ITER = 15;
+	const LIS_INT ERROR_ITER = 43;
+	const LIS_INT CHKPT_ITER = CHECK_ITER;
+	const LIS_SCALAR eps = 1e-10;
+	LIS_INT flag = 0;
+	LIS_SCALAR rerrX; // TBD
+	LIS_INT localN, globalN;
+	LIS_VECTOR sumA, Ones;
+	LIS_SCALAR cksA, cksX, cksR, cksP, cksPh, cksQ, cksQh, cksVh, cksU, cksUh, checksum; // TBD
 
 	LIS_DEBUG_FUNC_IN;
+
+	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
 	A       = solver->A;
 	M       = solver->precon;
@@ -160,13 +175,17 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 	phat    = solver->work[3];
 	q       = solver->work[4];
 	qhat    = solver->work[5];
-	u       = solver->work[5];
+	u       = solver->work[5];  // u and qhat share one vector
 	uhat    = solver->work[6];
-	vhat    = solver->work[6];
+	vhat    = solver->work[6];  // vhat and uhat share one vector
 	alpha   = (LIS_SCALAR)1.0;
 	rho_old = (LIS_SCALAR)1.0;
+	// suifengls: assign vectors space
+	Ones    = solver->work[7];
+	sumA    = solver->work[8];
 
-
+	lis_matrix_get_size(A, &localN, &globalN);
+	
 	/* Initial Residual */
 	if( lis_solver_get_initial_residual(solver,NULL,NULL,r,&bnrm2) )
 	{
@@ -180,6 +199,17 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 	lis_vector_set_all(0,q);
 	lis_vector_set_all(0,p);
 
+	// suifengls: initialize all checksums
+	lis_vector_set_all(1.0, Ones);
+	lis_matvect(A, Ones, sumA);
+	lis_vector_dot(Ones, sumA, &cksA);
+	lis_vector_axpy(-cksA/(globalN+1), Ones, sumA);
+	lis_vector_dot(Ones, sumA, &cksA);
+	// other checksum
+	lis_vector_dot(Ones, r, &cksR);
+	lis_vector_dot(Ones, x, &cksX);
+	cksP = 0.0, cksPh = 0.0, cksQ = 0.0, cksQh = 0.0;
+	cksVh = 0.0, cksU = 0.0, cksUh = 0.0;	
 	
 	for( iter=1; iter<=maxiter; iter++ )
 	{
@@ -201,18 +231,27 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 
 		/* u = r + beta*q */
 		lis_vector_axpyz(beta,q,r,u);
-
+		// suifengls: checksum U
+		cksU = cksR + beta * cksQ;
+		
 		/* p = u + beta*(q + beta*p) */
 		lis_vector_xpay(q,beta,p);
 		lis_vector_xpay(u,beta,p);
+		// suifengls: checksum P
+		cksP = cksU + beta * (cksQ + beta * cksP);
 		
 		/* phat = M^-1 * p */
 		times = lis_wtime();
 		lis_psolve(solver, p, phat);
 		ptimes += lis_wtime()-times;
+		// suifengls: checksum Phat, no error
+		lis_vector_dot(Ones, phat, &cksPh);
 
 		/* v = A * phat */
 		LIS_MATVEC(A,phat,vhat);
+		// suifengls: checksum Vhat
+		lis_vector_dot(phat, sumA, &cksVh);
+		cksVh = cksVh + cksA * cksPh;
 		
 		/* tmpdot1 = <rtld,vhat> */
 		lis_vector_dot(rtld,vhat,&tmpdot1);
@@ -231,23 +270,44 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 		
 		/* q = u - alpha*vhat */
 		lis_vector_axpyz(-alpha,vhat,u,q);
-
+		// suifengls: checksum Q -> 0.0, no error
+		//cksQ = cksU - alpha * cksVh;
+		lis_vector_dot(Ones, q, &cksQ);
+		
 		/* phat = u + q          */
 		/* uhat = M^-1 * (u + q) */
 		lis_vector_axpyz(1,u,q,phat);
+		// suifengls: checksum Ph
+		cksPh = cksU + cksQ;
+		    
 		times = lis_wtime();
 		lis_psolve(solver, phat, uhat);
 		ptimes += lis_wtime()-times;
-
+		// suifengls: checksum Uhat, no error
+		lis_vector_dot(Ones, uhat, &cksUh);
+		
 		/* x = x + alpha*uhat */
 		lis_vector_axpy(alpha,uhat,x);
+		// suifengls: checksum X
+		cksX = cksX + alpha * cksUh;
 
 		/* qhat = A * uhat */
 		LIS_MATVEC(A,uhat,qhat);
+		// suifengls: checksum Qhat
+		lis_vector_dot(uhat, sumA, &cksQh);
+		cksQh = cksQh + cksA * cksUh;
 
 		/* r = r - alpha*qhat */
 		lis_vector_axpy(-alpha,qhat,r);
-
+		// suifengls: checksum R
+		cksR = cksR - alpha * cksQh;
+                /*
+		// suifengls: print out checksum and sum
+		lis_vector_dot(Ones, r, &checksum);
+		rerrX = fabs(checksum - cksR)/fabs(cksR);
+		if(!rank) printf("cks = %e, sum = %e, rel = %e\n", cksR, checksum, rerrX);
+		*/
+		
 		/* convergence check */
 		lis_solver_get_residual[conv](r,solver,&nrm2);
 		if( output )
