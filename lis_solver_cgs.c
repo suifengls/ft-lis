@@ -1,3 +1,9 @@
+/**********************************************************************
+* Author        :   suifengls
+* E-mail        :   suifengls@gmail.com 
+* Last modified :   2013-07-17 01:58
+* Description   :   Fault Tolerant Conjugate Gradient Squared
+**********************************************************************/
 /* Copyright (C) The Scalable Software Infrastructure Project. All rights reserved.
 
    Redistribution and use in source and binary forms, with or without
@@ -59,7 +65,7 @@
  **********************************************
  for k=1,2,...
    rho(k-1)  = <rtld,r(k-1)> 
-   beta      = rho(k-1) / rho(k-2) 
+   beta      = rho(k-1) / rho(k-2)  
    u(k)      = r(k-1) + beta*q(k-1) 
    p(k)      = u(k) + beta*(q(k-1) + beta*p(k-1)) 
    phat(k)   = M^-1 * p(k) 
@@ -93,8 +99,8 @@ LIS_INT lis_cgs_malloc_work(LIS_SOLVER solver)
 
 	LIS_DEBUG_FUNC_IN;
 
-	// suifengls: extar working vectors, 2 = Ones + sumA
-	worklen = NWORK + 2;
+	// suifengls: extar working vectors, 2 = Ones + sumA, 4 = ckptR + ckptX + ckptP + ckptQ
+	worklen = NWORK + 2 + 4;
 	work    = (LIS_VECTOR *)lis_malloc( worklen*sizeof(LIS_VECTOR),"lis_cgs_malloc_work::work" );
 	if( work==NULL )
 	{
@@ -154,7 +160,11 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 	LIS_INT localN, globalN;
 	LIS_VECTOR sumA, Ones;
 	LIS_SCALAR cksA, cksX, cksR, cksP, cksPh, cksQ, cksQh, cksVh, cksU, cksUh, checksum; // TBD
-
+	// suifengls: ckp define variables
+	LIS_VECTOR ckptR, ckptX, ckptP, ckptQ;
+	LIS_SCALAR ckprho, ckpr, ckpx, ckpp, ckpq;
+	LIS_INT ckpiter;
+	
 	LIS_DEBUG_FUNC_IN;
 
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
@@ -183,7 +193,11 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 	// suifengls: assign vectors space
 	Ones    = solver->work[7];
 	sumA    = solver->work[8];
-
+	ckptR   = solver->work[9];
+	ckptX   = solver->work[10];
+	ckptP   = solver->work[11];
+	ckptQ   = solver->work[12];
+	
 	lis_matrix_get_size(A, &localN, &globalN);
 	
 	/* Initial Residual */
@@ -210,7 +224,8 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 	lis_vector_dot(Ones, x, &cksX);
 	cksP = 0.0, cksPh = 0.0, cksQ = 0.0, cksQh = 0.0;
 	cksVh = 0.0, cksU = 0.0, cksUh = 0.0;	
-	
+
+	flag = 0;
 	for( iter=1; iter<=maxiter; iter++ )
 	{
 		/* rho = <rtld,r> */
@@ -247,11 +262,22 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 		// suifengls: checksum Phat, no error
 		lis_vector_dot(Ones, phat, &cksPh);
 
+		/*
+		// suifengls: print out checksum and sum
+		lis_vector_dot(Ones, phat, &checksum);
+		rerrX = fabs(checksum - cksPh)/fabs(cksPh);
+		if(!rank) printf("cks = %e, sum = %e, rel = %e\n", cksPh, checksum, rerrX);
+		*/
 		/* v = A * phat */
 		LIS_MATVEC(A,phat,vhat);
 		// suifengls: checksum Vhat
 		lis_vector_dot(phat, sumA, &cksVh);
 		cksVh = cksVh + cksA * cksPh;
+		if(!rank && iter == ERROR_ITER)
+		{
+		    printf("=========== Introduce an error at iteration %d ==========\n", iter);
+		    lis_vector_set_value(LIS_INS_VALUE, 0, 16, vhat);
+		}
 		
 		/* tmpdot1 = <rtld,vhat> */
 		lis_vector_dot(rtld,vhat,&tmpdot1);
@@ -271,15 +297,14 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 		/* q = u - alpha*vhat */
 		lis_vector_axpyz(-alpha,vhat,u,q);
 		// suifengls: checksum Q -> 0.0, no error
-		//cksQ = cksU - alpha * cksVh;
-		lis_vector_dot(Ones, q, &cksQ);
+		cksQ = cksU - alpha * cksVh;
+		//lis_vector_dot(Ones, q, &cksQ);
 		
 		/* phat = u + q          */
 		/* uhat = M^-1 * (u + q) */
 		lis_vector_axpyz(1,u,q,phat);
 		// suifengls: checksum Ph
-		cksPh = cksU + cksQ;
-		    
+		//cksPh = cksU + cksQ; // tmp value?		
 		times = lis_wtime();
 		lis_psolve(solver, phat, uhat);
 		ptimes += lis_wtime()-times;
@@ -290,7 +315,7 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 		lis_vector_axpy(alpha,uhat,x);
 		// suifengls: checksum X
 		cksX = cksX + alpha * cksUh;
-
+		
 		/* qhat = A * uhat */
 		LIS_MATVEC(A,uhat,qhat);
 		// suifengls: checksum Qhat
@@ -301,19 +326,70 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 		lis_vector_axpy(-alpha,qhat,r);
 		// suifengls: checksum R
 		cksR = cksR - alpha * cksQh;
-                /*
-		// suifengls: print out checksum and sum
-		lis_vector_dot(Ones, r, &checksum);
-		rerrX = fabs(checksum - cksR)/fabs(cksR);
-		if(!rank) printf("cks = %e, sum = %e, rel = %e\n", cksR, checksum, rerrX);
-		*/
 		
+		rho_old = rho;
+
 		/* convergence check */
 		lis_solver_get_residual[conv](r,solver,&nrm2);
 		if( output )
 		{
 			if( output & LIS_PRINT_MEM ) solver->residual[iter] = nrm2;
 			if( output & LIS_PRINT_OUT && A->my_rank==0 ) lis_print_rhistory(iter,nrm2);
+		}
+
+		// suifengls: checking
+		if(iter%CHECK_ITER == 0 || nrm2 <= tol)
+		{
+		    // checking cksX
+		    lis_vector_dot(Ones, x, &checksum);
+		    rerrX = fabs(checksum - cksX)/fabs(cksX);
+		    if(!flag && rerrX > eps)
+		    {
+			flag = 1;
+			if(!rank)
+			    printf("========== Error detected in X: %e at iteration %d ==========\n", rerrX, iter);
+		    }
+		    // checking cksP
+		    lis_vector_dot(Ones, p, &checksum);
+		    rerrX = fabs(checksum - cksP)/fabs(cksP);
+		    if(!flag && rerrX > eps)
+		    {
+			flag = 1;
+			if(!rank)
+			    printf("========== Error detected in P: %e at iteration %d ==========\n", rerrX, iter);
+		    }
+		    // suifengls: checkpointing and recover
+		    if(!flag && nrm2 > tol) // no error, no last iteration
+		    {
+			if(!rank)
+			    printf("========== Checkpointing at iteration %d ==========\n", iter);
+			ckpiter = iter;
+			ckprho = rho_old;
+			lis_vector_copy(r, ckptR);
+			ckpr = cksR;
+			lis_vector_copy(x, ckptX);
+			ckpx = cksX;
+			lis_vector_copy(p, ckptP);
+			ckpp = cksP;
+			lis_vector_copy(q, ckptQ);
+			ckpq = cksQ;
+		    }
+		    else if(flag) // error detect, recover
+		    {
+			if(!rank)
+			    printf("========== Rollback to iteration %d ==========\n", ckpiter);
+			//iter = ckpiter;
+			rho_old = ckprho;
+			lis_vector_copy(ckptR, r);
+			cksR = ckpr;
+			lis_vector_copy(ckptX, x);
+			cksX = ckpx;
+			lis_vector_copy(ckptP, p);
+			cksP = ckpp;
+			lis_vector_copy(ckptQ, q);
+			cksQ = ckpq;
+			flag = 0;
+		    }
 		}
 		
 		if( tol >= nrm2 )
@@ -326,7 +402,7 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 			return LIS_SUCCESS;
 		}
 		
-		rho_old = rho;
+
 	}
 
 	solver->retcode   = LIS_MAXITER;
