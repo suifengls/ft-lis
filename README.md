@@ -129,6 +129,7 @@ Conjugate Gradient Squared (CGS)
        qhat(k)   = A * uhat(k)
        r(k)      = r(k-1) - alpha*qhat(k)
      ------------------------------------
+     
 1. vector relationship
         
         u    = r + beta * q
@@ -140,6 +141,7 @@ Conjugate Gradient Squared (CGS)
         x    = x + alpha * uhat
         qhat = A * uhat
         r    = r - alpha * qhat
+        
 2. checksum relationship map
 
         cksU *--- cksR *--- cksQhat *--- cksUhat ---* cksX
@@ -149,7 +151,9 @@ Conjugate Gradient Squared (CGS)
           *            |
           |            *
         cksVhat *--- cksPhat
+        
 3. check checksum of P and X
+
         1. cksX incorrect
         2. cksQhat incorrect -> cksR incorrect -> cksU incorrect <- cksQ incorrect 
            cksU incorrect -> cksQ incorrect <- cksVhat incorrect
