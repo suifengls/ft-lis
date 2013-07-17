@@ -1,9 +1,11 @@
 FT-LIS (private)
 ========
 
-Fault-Tolerant LIS
+**Fault-Tolerant Iterative Solver for Linear Systems**
 
-Work harder for PPoPP 09/01/2013
+**Work harder for PPoPP 09/01/2013**
+
+**Assume: no error during preconditioning**
 
 Conjugate Gradient(CG)
 -------- 
@@ -102,3 +104,53 @@ BiConjugate Gradient (BiCG)
            cksZ incorrect -> cksP incorrect -> cksX incorrect
         2. cksZt incorrect -> cksPt incorrect -> cksQt incorrect -> cksRt incorrect
      
+Conjugate Gradient Squared (CGS)
+--------
+     -----------------------------------    
+     r(0)    = b - Ax(0)
+     rtld(0) = r(0) or random
+     rho(-1) = 1
+     p(0)    = (0,...,0)^T
+     q(0)    = (0,...,0)^T
+     -----------------------------------
+     for k=1,2,...
+       rho(k-1)  = <rtld,r(k-1)> 
+       beta      = rho(k-1) / rho(k-2)  
+       u(k)      = r(k-1) + beta*q(k-1) 
+       p(k)      = u(k) + beta*(q(k-1) + beta*p(k-1)) 
+       phat(k)   = M^-1 * p(k) 
+       vhat(k)   = A * phat(k) 
+       tmpdot1   = <rtld,vhat(k-1)> 
+       alpha     = rho(k-1) / tmpdot1 
+       q(k)      = u(k) - alpha*vhat(k) 
+       phat(k)   = u(k) + q(k)
+       uhat(k)   = M^-1 * (u(k) + q(k))
+       x(k)      = x(k-1) + alpha*uhat(k)
+       qhat(k)   = A * uhat(k)
+       r(k)      = r(k-1) - alpha*qhat(k)
+     ------------------------------------
+1. vector relationship
+        
+        u    = r + beta * q
+        p    = u + beta * (q + beta * p)
+        phat = M^(-1) * p
+        vhat = A * phat
+        q    = u - alpha * vhat
+        uhat = M^(-1) * (u + q)
+        x    = x + alpha * uhat
+        qhat = A * uhat
+        r    = r - alpha * qhat
+2. checksum relationship map
+
+        cksU *--- cksR *--- cksQhat *--- cksUhat ---* cksX
+         * |
+         | *
+        cksQ  ---*   cksP *--- cksU
+          *            |
+          |            *
+        cksVhat *--- cksPhat
+3. check checksum of P and X
+        1. cksX incorrect
+        2. cksQhat incorrect -> cksR incorrect -> cksU incorrect <- cksQ incorrect 
+           cksU incorrect -> cksQ incorrect <- cksVhat incorrect
+           cksU incorrect -> cksP incorrect <- cksQ incorrect
