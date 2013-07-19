@@ -352,7 +352,7 @@ LIS_INT lis_cgs(LIS_SOLVER solver)
 		    // checking cksP
 		    lis_vector_dot(Ones, p, &checksum);
 		    rerrX = fabs(checksum - cksP)/fabs(cksP);
-		    if(!flag && rerrX > eps)
+		    if(!flag && fabs(cksP) > eps && rerrX > eps)
 		    {
 			flag = 1;
 			if(!rank)
