@@ -151,8 +151,9 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	const LIS_INT CHECK_ITER = 15; // checking iteration
 	const LIS_INT ERROR_ITER = 43; // introduce error iteration, set to 0 = no error introduced
 	const LIS_INT CHKPT_ITER = 15; // checkpoint iteration
-	const LIS_SCALAR eps = 1e-10;
+	const LIS_SCALAR eps = 1e-10, tau = 1e-4;
 	LIS_INT flag = 0; // 1 - error detected, 0 - no error
+	LIS_SCALAR nrmx, bound;
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank); // tmp
 	LIS_SCALAR rerrX, rerrR;
 	LIS_INT locN, gloN;
@@ -162,7 +163,6 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	LIS_VECTOR ckpR, ckpP, ckpX;
 	LIS_SCALAR ckprho = 0.0, ckpr, ckpp, ckpx;
 	LIS_INT ckpiter = 0;
-	LIS_INT num_error = 1;
 
 	LIS_DEBUG_FUNC_IN;
 
@@ -213,21 +213,20 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 	lis_vector_axpy(-cksA/(gloN+1), Ones, sumA);
 	// cksA = sum of sumA
 	lis_vector_dot(Ones, sumA, &cksA);
+	//cksA = -cksA/(gloN+1);
 	//lis_output_vector(sumA, LIS_FMT_MM, "sumA");
 	// initialize all checksum
-	cksR = 0.0, cksZ = 0.0, cksP = 0.0, cksQ = 0.0, cksX = 0.0, checksum = 0.0;
+	cksZ = 0.0, cksP = 0.0, cksQ = 0.0, checksum = 0.0;
 	lis_vector_dot(Ones, r, &cksR);
 	lis_vector_dot(Ones, x, &cksX);
 	
 	flag = 0;  
-	num_error = 2;
 	for( iter=1; iter<=maxiter; iter++ )
 	{
 		/* z = M^-1 * r */
 		times = lis_wtime();
 		lis_psolve(solver,r,z);
 		ptimes += lis_wtime() - times;
-
 		// assuming no error in precondition
 		// suifengls: checksum Z
 		lis_vector_dot(Ones, z, &cksZ);
@@ -245,18 +244,15 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		
 		/* q = Ap */
 		LIS_MATVEC(A,p,q);
-
 		// suifengls: checksum Q
 		lis_vector_dot(p, sumA, &cksQ);
 		cksQ = cksQ + cksA * cksP;
 		
 		// suifengls: introduce an error
-		if(!rank && iter == ERROR_ITER)
-		//if(num_error > 0 && !rank && iter == ERROR_ITER)
+		if(!rank & iter == ERROR_ITER)
 		{
-			printf("========== Introducing an error at iteration %d ==========\n", iter);
-			lis_vector_set_value(LIS_INS_VALUE, 0, 16, q); 
-			num_error--;
+		    printf("========== Introducing an error at iteration %d ==========\n", iter);
+		    lis_vector_set_value(LIS_INS_VALUE, 0, 16, q); 
 		}
 		/* dot_pq = <p,q> */
 		lis_vector_dot(p,q,&dot_pq);
@@ -299,24 +295,33 @@ LIS_INT lis_cg(LIS_SOLVER solver)
 		{
 			// suifengls: checking cksX
 			lis_vector_dot(Ones, x, &checksum);
-			rerrX = fabs(checksum - cksX)/fabs(cksX);
-			if(rerrX > eps && !flag)
+			rerrX = fabs(checksum - cksX);
+			lis_vector_nrm1(x, &nrmx);
+			bound = tau * nrmx;
+			if(rerrX > bound && !flag)
 			{
 				flag = 1; // error detected!
 				if(!rank)
-					printf("========== Error detected in X: %e at iteration %d ==========\n", rerrX, iter);
-				//printf("sum of X = %e, checksum = %e\n", checksum, cksX);
+				{
+				    printf("========== Error detected in X: %e (bound %e) at iteration %d ==========\n", rerrX, bound, iter);
+				    printf("sum of X = %e, checksum = %e\n", checksum, cksX);
+				}
 			}
 
 			// suifengls: checking cksR
 			lis_vector_dot(Ones, r, &checksum);
-			rerrR = fabs(checksum - cksR)/fabs(cksR);
-			if((fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !flag)
+			rerrR = fabs(checksum - cksR);
+			lis_vector_nrm1(r, &nrmx);
+			bound = tau * nrmx;
+			//if((fabs(cksR) > eps && fabs(checksum) > eps) && rerrR > eps && !flag)
+			if(bound > eps && rerrR > bound && !flag)
 			{
 				flag = 1; // error detected!
 				if(!rank)
-					printf("========== Error detected in R: %e at iteration %d ==========\n", rerrR, iter);
-				//printf("sum of R = %e, checksum = %e\n", checksum, cksR);
+				{
+				    printf("========== Error detected in R: %e (bound %e) at iteration %d ==========\n", rerrR, bound,  iter);
+				    printf("sum of R = %e, checksum = %e\n", checksum, cksR);
+				}
 			}
 
 			// suifengls: checkpointing and recovery
