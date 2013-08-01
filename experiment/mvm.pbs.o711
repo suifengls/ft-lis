@@ -1,0 +1,100 @@
+G3_circuit
+
+number of processes = 64
+matrix size = 1585478 x 1585478 (4623152 nonzero entries)
+********************************************************
+Average rel error = 7.215496e+05
+Building checksum average time = 0.003780 sec.
+Computing MVM average time = 0.003186 sec.
+Total average execution time = 0.006966 sec.
+********************************************************
+Emila_923
+
+number of processes = 64
+matrix size = 923136 x 923136 (20964171 nonzero entries)
+********************************************************
+Average rel error = 2.323070e+01
+Building checksum average time = 0.005979 sec.
+Computing MVM average time = 0.005565 sec.
+Total average execution time = 0.011545 sec.
+********************************************************
+ecology2
+
+number of processes = 64
+matrix size = 999999 x 999999 (2997995 nonzero entries)
+********************************************************
+Average rel error = 3.506233e+13
+Building checksum average time = 0.000709 sec.
+Computing MVM average time = 0.000448 sec.
+Total average execution time = 0.001157 sec.
+********************************************************
+inline_1
+
+number of processes = 64
+matrix size = 503712 x 503712 (18660027 nonzero entries)
+********************************************************
+Average rel error = 6.795272e+04
+Building checksum average time = 0.008288 sec.
+Computing MVM average time = 0.008016 sec.
+Total average execution time = 0.016304 sec.
+********************************************************
+Flan_1565
+
+number of processes = 64
+matrix size = 1564794 x 1564794 (59485419 nonzero entries)
+********************************************************
+Average rel error = 6.027558e+03
+Building checksum average time = 0.013831 sec.
+Computing MVM average time = 0.013200 sec.
+Total average execution time = 0.027032 sec.
+********************************************************
+Geo_1438
+
+number of processes = 64
+matrix size = 1437960 x 1437960 (32297325 nonzero entries)
+********************************************************
+Average rel error = 2.815697e-01
+Building checksum average time = 0.009143 sec.
+Computing MVM average time = 0.008559 sec.
+Total average execution time = 0.017702 sec.
+********************************************************
+bcsstk20
+
+number of processes = 64
+matrix size = 485 x 485 (1810 nonzero entries)
+********************************************************
+Average rel error = 1.821347e-03
+Building checksum average time = 0.000115 sec.
+Computing MVM average time = 0.000046 sec.
+Total average execution time = 0.000161 sec.
+********************************************************
+bcsstk23
+
+number of processes = 64
+matrix size = 3134 x 3134 (24156 nonzero entries)
+********************************************************
+Average rel error = 5.211605e-05
+Building checksum average time = 0.000116 sec.
+Computing MVM average time = 0.000057 sec.
+Total average execution time = 0.000173 sec.
+********************************************************
+cvxbqp1
+
+number of processes = 64
+matrix size = 50000 x 50000 (199984 nonzero entries)
+********************************************************
+Average rel error = 1.210460e+04
+Building checksum average time = 0.000782 sec.
+Computing MVM average time = 0.000742 sec.
+Total average execution time = 0.001523 sec.
+********************************************************
+bmwcra_1
+
+number of processes = 64
+matrix size = 148770 x 148770 (5396386 nonzero entries)
+********************************************************
+Average rel error = 3.330812e+05
+Building checksum average time = 0.001254 sec.
+Computing MVM average time = 0.001152 sec.
+Total average execution time = 0.002406 sec.
+********************************************************

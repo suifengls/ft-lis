@@ -1,0 +1,100 @@
+circuit5M/circuit5M.mtx
+
+number of processes = 384
+matrix size = 5558326 x 5558326 (59524291 nonzero entries)
+********************************************************
+Average rel error = 9.920411e-06
+Building checksum average time = 0.098296 sec.
+Computing MVM average time = 0.089596 sec.
+Total average execution time = 0.187892 sec.
+********************************************************
+cage15/cage15.mtx
+
+number of processes = 384
+matrix size = 5154859 x 5154859 (99199551 nonzero entries)
+********************************************************
+Average rel error = 6.989397e-08
+Building checksum average time = 0.012473 sec.
+Computing MVM average time = 0.012752 sec.
+Total average execution time = 0.025225 sec.
+********************************************************
+atmosmodj/atmosmodj.mtx
+
+number of processes = 384
+matrix size = 1270432 x 1270432 (8814880 nonzero entries)
+********************************************************
+Average rel error = 4.221082e-08
+Building checksum average time = 0.000606 sec.
+Computing MVM average time = 0.000366 sec.
+Total average execution time = 0.000972 sec.
+********************************************************
+Freescale1/Freescale1.mtx
+
+number of processes = 384
+matrix size = 3428755 x 3428755 (18920347 nonzero entries)
+********************************************************
+Average rel error = 1.969960e-08
+Building checksum average time = 0.013397 sec.
+Computing MVM average time = 0.012820 sec.
+Total average execution time = 0.026218 sec.
+********************************************************
+Hamrle3/Hamrle3.mtx
+
+number of processes = 384
+matrix size = 1447360 x 1447360 (5514242 nonzero entries)
+********************************************************
+Average rel error = 3.229281e-06
+Building checksum average time = 0.004043 sec.
+Computing MVM average time = 0.004207 sec.
+Total average execution time = 0.008250 sec.
+********************************************************
+tmt_unsym/tmt_unsym.mtx
+
+number of processes = 384
+matrix size = 917825 x 917825 (4584801 nonzero entries)
+********************************************************
+Average rel error = 1.528119e-08
+Building checksum average time = 0.000501 sec.
+Computing MVM average time = 0.000160 sec.
+Total average execution time = 0.000661 sec.
+********************************************************
+RM07R/RM07R.mtx
+
+number of processes = 384
+matrix size = 381689 x 381689 (37464962 nonzero entries)
+********************************************************
+Average rel error = 8.236326e-09
+Building checksum average time = 0.002438 sec.
+Computing MVM average time = 0.002400 sec.
+Total average execution time = 0.004838 sec.
+********************************************************
+twotone/twotone.mtx
+
+number of processes = 384
+matrix size = 120750 x 120750 (1224224 nonzero entries)
+********************************************************
+Average rel error = 1.623512e-11
+Building checksum average time = 0.001908 sec.
+Computing MVM average time = 0.001878 sec.
+Total average execution time = 0.003786 sec.
+********************************************************
+torso2/torso2.mtx
+
+number of processes = 384
+matrix size = 115967 x 115967 (1033473 nonzero entries)
+********************************************************
+Average rel error = 4.751229e-12
+Building checksum average time = 0.000362 sec.
+Computing MVM average time = 0.000211 sec.
+Total average execution time = 0.000573 sec.
+********************************************************
+hcircuit/hcircuit.mtx
+
+number of processes = 384
+matrix size = 105676 x 105676 (513072 nonzero entries)
+********************************************************
+Average rel error = 3.326135e-11
+Building checksum average time = 0.001789 sec.
+Computing MVM average time = 0.001598 sec.
+Total average execution time = 0.003386 sec.
+********************************************************
