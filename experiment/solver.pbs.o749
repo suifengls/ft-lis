@@ -1,0 +1,110 @@
+G3_circuit
+
+number of processes = 64
+matrix size = 1585478 x 1585478 (4623152 nonzero entries)
+CG: number of iterations     = 25332 (double = 25332, quad = 0)
+CG: elapsed time             = 1.045595e+02 sec.
+CG:   preconditioner         = 2.981446e+00 sec.
+CG:     matrix creation      = 1.192093e-06 sec.
+CG:   linear solver          = 1.015780e+02 sec.
+CG: relative residual 2-norm = 8.945352e-13
+
+Emila_923
+
+number of processes = 64
+matrix size = 923136 x 923136 (20964171 nonzero entries)
+CG: number of iterations     = 665869 (double = 665869, quad = 0)
+CG: elapsed time             = 4.094793e+03 sec.
+CG:   preconditioner         = 3.767002e+01 sec.
+CG:     matrix creation      = 9.536743e-07 sec.
+CG:   linear solver          = 4.057123e+03 sec.
+CG: relative residual 2-norm = 9.795804e-13
+
+ecology2
+
+number of processes = 64
+matrix size = 999999 x 999999 (2997995 nonzero entries)
+CG: number of iterations     = 7512 (double = 7512, quad = 0)
+CG: elapsed time             = 6.029599e+00 sec.
+CG:   preconditioner         = 3.121810e-01 sec.
+CG:     matrix creation      = 1.907349e-06 sec.
+CG:   linear solver          = 5.717418e+00 sec.
+CG: relative residual 2-norm = 9.965737e-13
+
+inline_1
+
+number of processes = 64
+matrix size = 503712 x 503712 (18660027 nonzero entries)
+CG: number of iterations     = 97279 (double = 97279, quad = 0)
+CG: elapsed time             = 8.048596e+02 sec.
+CG:   preconditioner         = 3.074234e+00 sec.
+CG:     matrix creation      = 2.145767e-06 sec.
+CG:   linear solver          = 8.017854e+02 sec.
+CG: relative residual 2-norm = 9.666820e-13
+
+Flan_1565
+
+number of processes = 64
+matrix size = 1564794 x 1564794 (59485419 nonzero entries)
+CG: number of iterations     = 34508 (double = 34508, quad = 0)
+CG: elapsed time             = 4.907813e+02 sec.
+CG:   preconditioner         = 3.259921e+00 sec.
+CG:     matrix creation      = 1.192093e-06 sec.
+CG:   linear solver          = 4.875213e+02 sec.
+CG: relative residual 2-norm = 9.644560e-13
+
+Geo_1438
+
+number of processes = 64
+matrix size = 1437960 x 1437960 (32297325 nonzero entries)
+CG: number of iterations     = 84374 (double = 84374, quad = 0)
+CG: elapsed time             = 8.012196e+02 sec.
+CG:   preconditioner         = 7.239493e+00 sec.
+CG:     matrix creation      = 9.536743e-07 sec.
+CG:   linear solver          = 7.939801e+02 sec.
+CG: relative residual 2-norm = 9.814095e-13
+
+bcsstk20
+
+number of processes = 64
+matrix size = 485 x 485 (1810 nonzero entries)
+CG: number of iterations     = 89061 (double = 89061, quad = 0)
+CG: elapsed time             = 3.803802e+00 sec.
+CG:   preconditioner         = 4.131413e-02 sec.
+CG:     matrix creation      = 9.536743e-07 sec.
+CG:   linear solver          = 3.762488e+00 sec.
+CG: relative residual 2-norm = 9.658169e-13
+
+bcsstk23
+
+number of processes = 64
+matrix size = 3134 x 3134 (24156 nonzero entries)
+CG: number of iterations     = 1370364 (double = 1370364, quad = 0)
+CG: elapsed time             = 8.593893e+01 sec.
+CG:   preconditioner         = 7.559414e-01 sec.
+CG:     matrix creation      = 9.536743e-07 sec.
+CG:   linear solver          = 8.518299e+01 sec.
+CG: relative residual 2-norm = 9.679653e-13
+
+cvxbqp1
+
+number of processes = 64
+matrix size = 50000 x 50000 (199984 nonzero entries)
+CG: number of iterations     = 21594 (double = 21594, quad = 0)
+CG: elapsed time             = 1.575445e+01 sec.
+CG:   preconditioner         = 3.191924e-02 sec.
+CG:     matrix creation      = 9.536743e-07 sec.
+CG:   linear solver          = 1.572253e+01 sec.
+CG: relative residual 2-norm = 9.983347e-13
+
+bmwcra_1
+
+number of processes = 64
+matrix size = 148770 x 148770 (5396386 nonzero entries)
+CG: number of iterations     = 14999 (double = 14999, quad = 0)
+CG: elapsed time             = 1.925513e+01 sec.
+CG:   preconditioner         = 3.199670e-01 sec.
+CG:     matrix creation      = 0.000000e+00 sec.
+CG:   linear solver          = 1.893516e+01 sec.
+CG: relative residual 2-norm = 9.521103e-13
+

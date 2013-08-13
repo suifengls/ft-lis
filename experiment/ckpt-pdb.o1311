@@ -1,0 +1,12 @@
+
+number of processes = 512
+matrix size = 36417 x 36417 (2190591 nonzero entries)
+CG: number of iterations     = 2000001 (double = 2000001, quad = 0)
+CG: elapsed time             = 1.060462e+03 sec.
+CG:   preconditioner         = 9.536743e-07 sec.
+CG:     matrix creation      = 9.536743e-07 sec.
+CG:   linear solver          = 1.060462e+03 sec.
+CG: relative residual 2-norm = 5.084781e-07
+
+CG: number of iterations     = 2000001 (double = 2000001, quad = 0)
+=== CG:   average linear solver          = 1.060462e+03 sec.

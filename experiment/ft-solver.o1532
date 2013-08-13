@@ -1,0 +1,60 @@
+
+number of processes = 512
+matrix size = 62424 x 62424 (1717792 nonzero entries)
+========== Introducing an error at iteration 385, rate = 0.000820, rank = 421 ==========
+========== Introducing an error at iteration 1099, rate = 0.000310, rank = 257 ==========
+========== Introducing an error at iteration 1724, rate = 0.000110, rank = 389 ==========
+========== Introducing an error at iteration 1784, rate = 0.000350, rank = 309 ==========
+========== Introducing an error at iteration 2637, rate = 0.000970, rank = 245 ==========
+========== Introducing an error at iteration 3957, rate = 0.000940, rank = 67 ==========
+========== Introducing an error at iteration 4075, rate = 0.000780, rank = 316 ==========
+========== Introducing an error at iteration 5424, rate = 0.000450, rank = 404 ==========
+========== Introducing an error at iteration 8510, rate = 0.000650, rank = 376 ==========
+========== Introducing an error at iteration 8822, rate = 0.000050, rank = 81 ==========
+========== Introducing an error at iteration 14214, rate = 0.000150, rank = 159 ==========
+========== Introducing an error at iteration 14219, rate = 0.000300, rank = 152 ==========
+========== Introducing an error at iteration 15685, rate = 0.000450, rank = 378 ==========
+========== Introducing an error at iteration 17150, rate = 0.000400, rank = 202 ==========
+========== Introducing an error at iteration 18157, rate = 0.000140, rank = 62 ==========
+========== Introducing an error at iteration 18187, rate = 0.000570, rank = 347 ==========
+========== Introducing an error at iteration 18568, rate = 0.000090, rank = 268 ==========
+========== Introducing an error at iteration 20309, rate = 0.000860, rank = 97 ==========
+========== Introducing an error at iteration 20481, rate = 0.000210, rank = 485 ==========
+========== Introducing an error at iteration 23319, rate = 0.000820, rank = 207 ==========
+========== Introducing an error at iteration 23541, rate = 0.000530, rank = 508 ==========
+========== Introducing an error at iteration 24094, rate = 0.000490, rank = 78 ==========
+========== Introducing an error at iteration 24298, rate = 0.000340, rank = 308 ==========
+========== Introducing an error at iteration 25394, rate = 0.000140, rank = 385 ==========
+========== Introducing an error at iteration 25566, rate = 0.000610, rank = 405 ==========
+========== Introducing an error at iteration 25765, rate = 0.000630, rank = 355 ==========
+========== Introducing an error at iteration 29143, rate = 0.000090, rank = 48 ==========
+========== Introducing an error at iteration 29268, rate = 0.000520, rank = 458 ==========
+========== Introducing an error at iteration 31063, rate = 0.000020, rank = 87 ==========
+========== Introducing an error at iteration 31508, rate = 0.000920, rank = 455 ==========
+========== Introducing an error at iteration 31736, rate = 0.000760, rank = 198 ==========
+========== Introducing an error at iteration 31996, rate = 0.000670, rank = 428 ==========
+========== Introducing an error at iteration 36285, rate = 0.000040, rank = 170 ==========
+========== Introducing an error at iteration 36944, rate = 0.000270, rank = 281 ==========
+========== Introducing an error at iteration 37323, rate = 0.000260, rank = 122 ==========
+========== Introducing an error at iteration 39966, rate = 0.000890, rank = 351 ==========
+========== Introducing an error at iteration 41206, rate = 0.000030, rank = 277 ==========
+========== Introducing an error at iteration 41455, rate = 0.000870, rank = 437 ==========
+========== Introducing an error at iteration 41543, rate = 0.000850, rank = 28 ==========
+========== Introducing an error at iteration 41683, rate = 0.000030, rank = 100 ==========
+========== Introducing an error at iteration 41968, rate = 0.000970, rank = 4 ==========
+========== Introducing an error at iteration 42259, rate = 0.000100, rank = 365 ==========
+========== Introducing an error at iteration 42448, rate = 0.000790, rank = 128 ==========
+========== Introducing an error at iteration 42546, rate = 0.000360, rank = 134 ==========
+========== Introducing an error at iteration 43923, rate = 0.000710, rank = 163 ==========
+========== Introducing an error at iteration 43990, rate = 0.000640, rank = 104 ==========
+========== Introducing an error at iteration 45865, rate = 0.000370, rank = 68 ==========
+========== Introducing an error at iteration 46733, rate = 0.000310, rank = 33 ==========
+BiCGSTAB: number of iterations     = 49079 (double = 49079, quad = 0)
+BiCGSTAB: elapsed time             = 1.103326e+02 sec.
+BiCGSTAB:   preconditioner         = 1.060915e-01 sec.
+BiCGSTAB:     matrix creation      = 9.536743e-07 sec.
+BiCGSTAB:   linear solver          = 1.102265e+02 sec.
+BiCGSTAB: relative residual 2-norm = 7.685689e-13
+
+BiCGSTAB: number of iterations     = 49079 (double = 49079, quad = 0)
+=== BiCGSTAB:   average linear solver          = 1.103326e+02 sec.

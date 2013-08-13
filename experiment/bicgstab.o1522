@@ -1,0 +1,106 @@
+
+number of processes = 512
+matrix size = 62424 x 62424 (1717792 nonzero entries)
+========== Introducing an error at iteration 385, rate = 0.000820, rank = 421 ==========
+========== Error detected in P: 3.212332e-03 at iteration 390
+========== Rollback to iteration 360 ==========
+========== Introducing an error at iteration 1099, rate = 0.000310, rank = 257 ==========
+========== Error detected in P: 8.031135e-05 at iteration 1110
+========== Rollback to iteration 1080 ==========
+========== Introducing an error at iteration 1724, rate = 0.000110, rank = 389 ==========
+========== Error detected in P: 9.723475e-03 at iteration 1740
+========== Rollback to iteration 1710 ==========
+========== Introducing an error at iteration 1784, rate = 0.000350, rank = 309 ==========
+========== Error detected in P: 1.763780e-03 at iteration 1800
+========== Rollback to iteration 1770 ==========
+========== Introducing an error at iteration 2637, rate = 0.000970, rank = 245 ==========
+========== Error detected in P: 7.404212e-05 at iteration 2640
+========== Rollback to iteration 2610 ==========
+========== Introducing an error at iteration 3957, rate = 0.000940, rank = 67 ==========
+========== Error detected in P: 8.794191e-03 at iteration 3960
+========== Rollback to iteration 3930 ==========
+========== Introducing an error at iteration 4075, rate = 0.000780, rank = 316 ==========
+========== Error detected in P: 8.844417e-04 at iteration 4080
+========== Rollback to iteration 4050 ==========
+========== Introducing an error at iteration 5424, rate = 0.000450, rank = 404 ==========
+========== Error detected in P: 9.605816e-04 at iteration 5430
+========== Rollback to iteration 5400 ==========
+========== Introducing an error at iteration 8510, rate = 0.000650, rank = 376 ==========
+========== Error detected in P: 1.074092e-03 at iteration 8520
+========== Rollback to iteration 8490 ==========
+========== Introducing an error at iteration 8822, rate = 0.000050, rank = 81 ==========
+========== Error detected in P: 3.636026e-04 at iteration 8850
+========== Rollback to iteration 8820 ==========
+========== Introducing an error at iteration 14214, rate = 0.000150, rank = 159 ==========
+========== Introducing an error at iteration 14219, rate = 0.000300, rank = 152 ==========
+========== Error detected in P: 8.346755e-04 at iteration 14220
+========== Rollback to iteration 14190 ==========
+========== Introducing an error at iteration 15685, rate = 0.000450, rank = 378 ==========
+========== Error detected in P: 1.093010e-03 at iteration 15690
+========== Rollback to iteration 15660 ==========
+========== Introducing an error at iteration 17150, rate = 0.000400, rank = 202 ==========
+========== Error detected in P: 2.640980e-03 at iteration 17160
+========== Rollback to iteration 17130 ==========
+========== Introducing an error at iteration 18157, rate = 0.000140, rank = 62 ==========
+========== Error detected in P: 2.234840e-04 at iteration 18180
+========== Rollback to iteration 18150 ==========
+========== Introducing an error at iteration 18187, rate = 0.000570, rank = 347 ==========
+========== Error detected in P: 3.919692e-04 at iteration 18210
+========== Rollback to iteration 18150 ==========
+========== Introducing an error at iteration 18568, rate = 0.000090, rank = 268 ==========
+========== Error detected in P: 4.522397e-04 at iteration 18570
+========== Rollback to iteration 18540 ==========
+========== Introducing an error at iteration 20309, rate = 0.000860, rank = 97 ==========
+========== Error detected in P: 1.726301e-01 at iteration 20310
+========== Rollback to iteration 20280 ==========
+========== Introducing an error at iteration 20481, rate = 0.000210, rank = 485 ==========
+========== Error detected in P: 2.479550e-03 at iteration 20490
+========== Rollback to iteration 20460 ==========
+========== Introducing an error at iteration 23319, rate = 0.000820, rank = 207 ==========
+========== Error detected in P: 6.086217e-04 at iteration 23340
+========== Rollback to iteration 23310 ==========
+========== Introducing an error at iteration 23541, rate = 0.000530, rank = 508 ==========
+========== Error detected in P: 5.469356e-03 at iteration 23550
+========== Rollback to iteration 23520 ==========
+========== Introducing an error at iteration 24094, rate = 0.000490, rank = 78 ==========
+========== Error detected in P: 1.710322e-04 at iteration 24120
+========== Rollback to iteration 24090 ==========
+========== Introducing an error at iteration 24298, rate = 0.000340, rank = 308 ==========
+========== Error detected in P: 2.398997e-03 at iteration 24300
+========== Rollback to iteration 24270 ==========
+========== Introducing an error at iteration 25394, rate = 0.000140, rank = 385 ==========
+========== Error detected in P: 2.740646e-02 at iteration 25410
+========== Rollback to iteration 25380 ==========
+========== Introducing an error at iteration 25566, rate = 0.000610, rank = 405 ==========
+========== Error detected in P: 6.696979e-03 at iteration 25590
+========== Rollback to iteration 25560 ==========
+========== Introducing an error at iteration 25765, rate = 0.000630, rank = 355 ==========
+========== Error detected in P: 1.209774e-03 at iteration 25770
+========== Rollback to iteration 25740 ==========
+========== Introducing an error at iteration 29143, rate = 0.000090, rank = 48 ==========
+========== Error detected in P: 4.423524e-04 at iteration 29160
+========== Rollback to iteration 29130 ==========
+========== Introducing an error at iteration 29268, rate = 0.000520, rank = 458 ==========
+========== Error detected in P: 1.876581e-04 at iteration 29280
+========== Rollback to iteration 29250 ==========
+========== Introducing an error at iteration 31063, rate = 0.000020, rank = 87 ==========
+========== Error detected in P: 6.233416e-04 at iteration 31080
+========== Rollback to iteration 31050 ==========
+========== Introducing an error at iteration 31508, rate = 0.000920, rank = 455 ==========
+========== Error detected in P: 2.577140e-02 at iteration 31530
+========== Rollback to iteration 31500 ==========
+========== Introducing an error at iteration 31736, rate = 0.000760, rank = 198 ==========
+========== Error detected in P: 8.000697e-04 at iteration 31740
+========== Rollback to iteration 31710 ==========
+========== Introducing an error at iteration 31996, rate = 0.000670, rank = 428 ==========
+========== Error detected in P: 1.190109e-04 at iteration 32010
+========== Rollback to iteration 31980 ==========
+BiCGSTAB: number of iterations     = 35069 (double = 35069, quad = 0)
+BiCGSTAB: elapsed time             = 8.678605e+01 sec.
+BiCGSTAB:   preconditioner         = 7.893777e-02 sec.
+BiCGSTAB:     matrix creation      = 1.907349e-06 sec.
+BiCGSTAB:   linear solver          = 8.670711e+01 sec.
+BiCGSTAB: relative residual 2-norm = 9.408112e-13
+
+BiCGSTAB: number of iterations     = 35069 (double = 35069, quad = 0)
+=== BiCGSTAB:   average linear solver          = 8.678605e+01 sec.

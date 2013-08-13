@@ -1,0 +1,12 @@
+
+number of processes = 512
+matrix size = 62424 x 62424 (1717792 nonzero entries)
+BiCGSTAB: number of iterations     = 34111 (double = 34111, quad = 0)
+BiCGSTAB: elapsed time             = 7.710439e+01 sec.
+BiCGSTAB:   preconditioner         = 5.162811e-02 sec.
+BiCGSTAB:     matrix creation      = 9.536743e-07 sec.
+BiCGSTAB:   linear solver          = 7.705276e+01 sec.
+BiCGSTAB: relative residual 2-norm = 9.274194e-13
+
+BiCGSTAB: number of iterations     = 34111 (double = 34111, quad = 0)
+=== BiCGSTAB:   average linear solver          = 7.710439e+01 sec.

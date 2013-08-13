@@ -1,0 +1,13 @@
+chip0
+
+number of processes = 512
+matrix size = 20082 x 20082 (281150 nonzero entries)
+CGS: number of iterations     = 14860 (double = 14860, quad = 0)
+CGS: elapsed time             = 2.974894e+01 sec.
+CGS:   preconditioner         = 1.855993e-02 sec.
+CGS:     matrix creation      = 0.000000e+00 sec.
+CGS:   linear solver          = 2.973038e+01 sec.
+CGS: relative residual 2-norm = 6.087305e-13
+
+CGS: number of iterations     = 14860 (double = 14860, quad = 0)
+=== CGS:   average linear solver          = 2.974894e+01 sec.

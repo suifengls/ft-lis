@@ -1,0 +1,15 @@
+
+number of processes = 512
+matrix size = 36417 x 36417 (2190591 nonzero entries)
+========== Error detected in R: 6.721947e+01 (eps = 1.000000e-04) at iteration 8900 ==========
+sum of R = -1.996033e-03, checksum = -2.925899e-05
+========== Rollback to itertion 8850 ==========
+CG: number of iterations     = 11038 (double = 11038, quad = 0)
+CG: elapsed time             = 5.859355e+00 sec.
+CG:   preconditioner         = 8.592367e-03 sec.
+CG:     matrix creation      = 1.192093e-06 sec.
+CG:   linear solver          = 5.850763e+00 sec.
+CG: relative residual 2-norm = 9.690651e-13
+
+CG: number of iterations     = 11038 (double = 11038, quad = 0)
+=== CG:   average linear solver          = 5.859355e+00 sec.

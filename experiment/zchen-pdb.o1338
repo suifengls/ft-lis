@@ -1,0 +1,15 @@
+
+number of processes = 512
+matrix size = 36417 x 36417 (2190591 nonzero entries)
+========== Introducing an error at iteration 8882, rate = 0.000050, rank = 81 ==========
+========== Error detected at 8910 for p*q = -6.444833e-11 ==========
+========== Rollback to 8880 ==========
+CG: number of iterations     = 11522 (double = 11522, quad = 0)
+CG: elapsed time             = 6.665514e+00 sec.
+CG:   preconditioner         = 9.902239e-03 sec.
+CG:     matrix creation      = 0.000000e+00 sec.
+CG:   linear solver          = 6.655612e+00 sec.
+CG: relative residual 2-norm = 9.548154e-13
+
+CG: number of iterations     = 11522 (double = 11522, quad = 0)
+=== CG:   average linear solver          = 6.665514e+00 sec.

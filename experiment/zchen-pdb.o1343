@@ -1,0 +1,401 @@
+
+number of processes = 512
+matrix size = 36417 x 36417 (2190591 nonzero entries)
+========== Introducing an error at iteration 83, rate = 0.007240, rank = 90 ==========
+========== Error detected at 90 for p*q = 4.436230e-17 ==========
+========== Rollback to 60 ==========
+========== Introducing an error at iteration 207, rate = 0.009740, rank = 155 ==========
+========== Error detected at 210 for p*q = 2.234940e-17 ==========
+========== Rollback to 180 ==========
+========== Introducing an error at iteration 389, rate = 0.006820, rank = 303 ==========
+========== Error detected at 390 for p*q = 4.195363e-17 ==========
+========== Rollback to 360 ==========
+========== Introducing an error at iteration 424, rate = 0.005700, rank = 258 ==========
+========== Introducing an error at iteration 432, rate = 0.000820, rank = 421 ==========
+========== Error detected at 450 for p*q = -1.447724e-16 ==========
+========== Rollback to 420 ==========
+========== Introducing an error at iteration 491, rate = 0.006070, rank = 484 ==========
+========== Introducing an error at iteration 493, rate = 0.002380, rank = 69 ==========
+========== Error detected at 510 for p*q = 4.346028e-17 ==========
+========== Rollback to 480 ==========
+========== Introducing an error at iteration 628, rate = 0.003470, rank = 43 ==========
+========== Error detected at 630 for p*q = -3.471600e-17 ==========
+========== Rollback to 600 ==========
+========== Introducing an error at iteration 636, rate = 0.009260, rank = 139 ==========
+========== Error detected at 660 for p*q = -3.471600e-17 ==========
+========== Rollback to 600 ==========
+========== Introducing an error at iteration 889, rate = 0.006580, rank = 438 ==========
+========== Error detected at 900 for p*q = -5.012090e-16 ==========
+========== Rollback to 870 ==========
+========== Introducing an error at iteration 1021, rate = 0.009610, rank = 21 ==========
+========== Error detected at 1050 for p*q = -2.249854e-16 ==========
+========== Rollback to 1020 ==========
+========== Introducing an error at iteration 1111, rate = 0.009390, rank = 205 ==========
+========== Introducing an error at iteration 1139, rate = 0.000310, rank = 257 ==========
+========== Error detected at 1140 for p*q = -7.678377e-16 ==========
+========== Rollback to 1110 ==========
+========== Introducing an error at iteration 1187, rate = 0.006700, rank = 242 ==========
+========== Error detected at 1200 for p*q = -3.737269e-16 ==========
+========== Rollback to 1170 ==========
+========== Introducing an error at iteration 1203, rate = 0.008220, rank = 66 ==========
+========== Error detected at 1230 for p*q = -3.737269e-16 ==========
+========== Rollback to 1170 ==========
+========== Introducing an error at iteration 1348, rate = 0.008020, rank = 467 ==========
+========== Error detected at 1350 for p*q = -6.771981e-16 ==========
+========== Rollback to 1320 ==========
+========== Introducing an error at iteration 1583, rate = 0.007700, rank = 250 ==========
+========== Error detected at 1590 for p*q = -3.231940e-16 ==========
+========== Rollback to 1560 ==========
+========== Introducing an error at iteration 1610, rate = 0.003360, rank = 137 ==========
+========== Error detected at 1620 for p*q = -3.231940e-16 ==========
+========== Rollback to 1560 ==========
+========== Introducing an error at iteration 1759, rate = 0.000110, rank = 389 ==========
+========== Introducing an error at iteration 1767, rate = 0.007000, rank = 409 ==========
+========== Error detected at 1770 for p*q = 1.562423e-15 ==========
+========== Rollback to 1740 ==========
+========== Introducing an error at iteration 1815, rate = 0.009310, rank = 6 ==========
+========== Introducing an error at iteration 1817, rate = 0.000350, rank = 309 ==========
+========== Error detected at 1830 for p*q = 1.699138e-15 ==========
+========== Rollback to 1800 ==========
+========== Introducing an error at iteration 1869, rate = 0.007550, rank = 110 ==========
+========== Error detected at 1890 for p*q = 8.581935e-16 ==========
+========== Rollback to 1860 ==========
+========== Introducing an error at iteration 2129, rate = 0.005740, rank = 144 ==========
+========== Error detected at 2130 for p*q = 7.006590e-15 ==========
+========== Rollback to 2100 ==========
+========== Introducing an error at iteration 2296, rate = 0.008490, rank = 294 ==========
+========== Error detected at 2310 for p*q = -2.749368e-13 ==========
+========== Rollback to 2280 ==========
+========== Introducing an error at iteration 2326, rate = 0.006590, rank = 472 ==========
+========== Error detected at 2340 for p*q = -2.749368e-13 ==========
+========== Rollback to 2280 ==========
+========== Introducing an error at iteration 2402, rate = 0.001320, rank = 24 ==========
+========== Error detected at 2430 for p*q = -2.998766e-13 ==========
+========== Rollback to 2400 ==========
+========== Introducing an error at iteration 2431, rate = 0.008390, rank = 410 ==========
+========== Introducing an error at iteration 2444, rate = 0.001140, rank = 179 ==========
+========== Error detected at 2460 for p*q = -2.998766e-13 ==========
+========== Rollback to 2400 ==========
+========== Introducing an error at iteration 2532, rate = 0.009880, rank = 438 ==========
+========== Error detected at 2550 for p*q = -1.361199e-13 ==========
+========== Rollback to 2520 ==========
+========== Introducing an error at iteration 2638, rate = 0.008710, rank = 273 ==========
+========== Error detected at 2640 for p*q = -1.089435e-12 ==========
+========== Rollback to 2610 ==========
+========== Introducing an error at iteration 2661, rate = 0.000970, rank = 245 ==========
+========== Error detected at 2670 for p*q = -1.089435e-12 ==========
+========== Rollback to 2610 ==========
+========== Introducing an error at iteration 2689, rate = 0.003620, rank = 112 ==========
+========== Error detected at 2700 for p*q = -1.089435e-12 ==========
+========== Rollback to 2610 ==========
+========== Introducing an error at iteration 2817, rate = 0.007080, rank = 411 ==========
+========== Error detected at 2820 for p*q = -5.023085e-12 ==========
+========== Rollback to 2790 ==========
+========== Introducing an error at iteration 3036, rate = 0.008360, rank = 58 ==========
+========== Error detected at 3060 for p*q = -1.647104e-10 ==========
+========== Rollback to 3030 ==========
+========== Introducing an error at iteration 3159, rate = 0.008680, rank = 203 ==========
+========== Introducing an error at iteration 3179, rate = 0.003140, rank = 483 ==========
+========== Error detected at 3180 for p*q = -3.000190e-10 ==========
+========== Rollback to 3150 ==========
+========== Introducing an error at iteration 3397, rate = 0.001180, rank = 429 ==========
+========== Error detected at 3420 for p*q = -3.171419e-10 ==========
+========== Rollback to 3390 ==========
+========== Introducing an error at iteration 3975, rate = 0.000940, rank = 67 ==========
+========== Error detected at 3990 for p*q = -2.375994e-13 ==========
+========== Rollback to 3960 ==========
+========== Introducing an error at iteration 4042, rate = 0.004700, rank = 163 ==========
+========== Error detected at 4050 for p*q = -7.041749e-14 ==========
+========== Rollback to 4020 ==========
+========== Introducing an error at iteration 4078, rate = 0.003240, rank = 164 ==========
+========== Error detected at 4080 for p*q = -7.041749e-14 ==========
+========== Rollback to 4020 ==========
+========== Introducing an error at iteration 4091, rate = 0.000780, rank = 316 ==========
+========== Error detected at 4110 for p*q = -7.041749e-14 ==========
+========== Rollback to 4020 ==========
+========== Introducing an error at iteration 4123, rate = 0.009760, rank = 82 ==========
+========== Error detected at 4140 for p*q = -7.041749e-14 ==========
+========== Rollback to 4020 ==========
+========== Introducing an error at iteration 4219, rate = 0.002730, rank = 127 ==========
+========== Error detected at 4230 for p*q = -2.627722e-13 ==========
+========== Rollback to 4200 ==========
+========== Introducing an error at iteration 4245, rate = 0.002030, rank = 48 ==========
+========== Introducing an error at iteration 4248, rate = 0.004750, rank = 176 ==========
+========== Error detected at 4260 for p*q = -2.627722e-13 ==========
+========== Rollback to 4200 ==========
+========== Introducing an error at iteration 4374, rate = 0.003060, rank = 464 ==========
+========== Error detected at 4380 for p*q = -9.756089e-14 ==========
+========== Rollback to 4350 ==========
+========== Introducing an error at iteration 4415, rate = 0.005500, rank = 278 ==========
+========== Introducing an error at iteration 4432, rate = 0.008440, rank = 106 ==========
+========== Error detected at 4440 for p*q = -8.914176e-14 ==========
+========== Rollback to 4410 ==========
+========== Introducing an error at iteration 4582, rate = 0.002560, rank = 460 ==========
+========== Error detected at 4590 for p*q = -4.092936e-13 ==========
+========== Rollback to 4560 ==========
+========== Introducing an error at iteration 4689, rate = 0.009950, rank = 307 ==========
+========== Error detected at 4710 for p*q = -1.228480e-13 ==========
+========== Rollback to 4680 ==========
+========== Introducing an error at iteration 4993, rate = 0.002580, rank = 433 ==========
+========== Error detected at 5010 for p*q = -8.361398e-13 ==========
+========== Rollback to 4980 ==========
+========== Introducing an error at iteration 5168, rate = 0.002250, rank = 363 ==========
+========== Introducing an error at iteration 5180, rate = 0.007610, rank = 166 ==========
+========== Introducing an error at iteration 5187, rate = 0.002800, rank = 76 ==========
+========== Error detected at 5190 for p*q = -5.923094e-13 ==========
+========== Rollback to 5160 ==========
+========== Introducing an error at iteration 5239, rate = 0.007610, rank = 421 ==========
+========== Introducing an error at iteration 5242, rate = 0.005540, rank = 447 ==========
+========== Error detected at 5250 for p*q = -1.490835e-12 ==========
+========== Rollback to 5220 ==========
+========== Introducing an error at iteration 5284, rate = 0.001790, rank = 276 ==========
+========== Introducing an error at iteration 5299, rate = 0.002610, rank = 0 ==========
+========== Introducing an error at iteration 5306, rate = 0.008210, rank = 355 ==========
+========== Error detected at 5310 for p*q = -1.344380e-12 ==========
+========== Rollback to 5280 ==========
+========== Introducing an error at iteration 5346, rate = 0.004880, rank = 235 ==========
+========== Introducing an error at iteration 5349, rate = 0.008170, rank = 222 ==========
+========== Error detected at 5370 for p*q = -7.040972e-13 ==========
+========== Rollback to 5340 ==========
+========== Introducing an error at iteration 5420, rate = 0.000450, rank = 404 ==========
+========== Error detected at 5430 for p*q = -3.255926e-13 ==========
+========== Rollback to 5400 ==========
+========== Introducing an error at iteration 5448, rate = 0.009420, rank = 472 ==========
+========== Error detected at 5460 for p*q = -3.255926e-13 ==========
+========== Rollback to 5400 ==========
+========== Introducing an error at iteration 5594, rate = 0.006820, rank = 114 ==========
+========== Error detected at 5610 for p*q = -1.049947e-11 ==========
+========== Rollback to 5580 ==========
+========== Introducing an error at iteration 5632, rate = 0.007320, rank = 15 ==========
+========== Error detected at 5640 for p*q = -1.049947e-11 ==========
+========== Rollback to 5580 ==========
+========== Introducing an error at iteration 5681, rate = 0.006000, rank = 5 ==========
+========== Error detected at 5700 for p*q = -1.987342e-11 ==========
+========== Rollback to 5670 ==========
+========== Introducing an error at iteration 5709, rate = 0.007350, rank = 173 ==========
+========== Error detected at 5730 for p*q = -1.987342e-11 ==========
+========== Rollback to 5670 ==========
+========== Introducing an error at iteration 5790, rate = 0.008060, rank = 511 ==========
+========== Error detected at 5790 for p*q = 5.413106e-03 ==========
+========== Rollback to 5760 ==========
+========== Introducing an error at iteration 5815, rate = 0.003530, rank = 46 ==========
+========== Introducing an error at iteration 5819, rate = 0.006920, rank = 403 ==========
+========== Error detected at 5820 for p*q = -1.570342e-10 ==========
+========== Rollback to 5760 ==========
+========== Introducing an error at iteration 5981, rate = 0.003220, rank = 193 ==========
+========== Error detected at 6000 for p*q = -6.193364e-11 ==========
+========== Rollback to 5970 ==========
+========== Introducing an error at iteration 6090, rate = 0.002140, rank = 402 ==========
+========== Error detected at 6090 for p*q = 1.618614e-04 ==========
+========== Rollback to 6060 ==========
+========== Introducing an error at iteration 6182, rate = 0.007030, rank = 389 ==========
+========== Error detected at 6210 for p*q = -5.157881e-11 ==========
+========== Rollback to 6180 ==========
+========== Introducing an error at iteration 6685, rate = 0.009810, rank = 118 ==========
+========== Error detected at 6690 for p*q = -2.355861e-12 ==========
+========== Rollback to 6660 ==========
+========== Introducing an error at iteration 6724, rate = 0.002540, rank = 448 ==========
+========== Introducing an error at iteration 6731, rate = 0.004070, rank = 46 ==========
+========== Introducing an error at iteration 6740, rate = 0.003460, rank = 433 ==========
+========== Error detected at 6750 for p*q = -1.039658e-12 ==========
+========== Rollback to 6720 ==========
+========== Introducing an error at iteration 6835, rate = 0.008860, rank = 204 ==========
+========== Error detected at 6840 for p*q = -3.439695e-13 ==========
+========== Rollback to 6810 ==========
+========== Introducing an error at iteration 6843, rate = 0.007460, rank = 110 ==========
+========== Error detected at 6870 for p*q = -3.439695e-13 ==========
+========== Rollback to 6810 ==========
+========== Introducing an error at iteration 7212, rate = 0.004870, rank = 476 ==========
+========== Error detected at 7230 for p*q = -7.988051e-14 ==========
+========== Rollback to 7200 ==========
+========== Introducing an error at iteration 7315, rate = 0.007220, rank = 131 ==========
+========== Error detected at 7320 for p*q = -4.735476e-14 ==========
+========== Rollback to 7290 ==========
+========== Introducing an error at iteration 7324, rate = 0.008580, rank = 480 ==========
+========== Error detected at 7350 for p*q = -4.735476e-14 ==========
+========== Rollback to 7290 ==========
+========== Introducing an error at iteration 7959, rate = 0.005750, rank = 201 ==========
+========== Error detected at 7980 for p*q = -1.557575e-12 ==========
+========== Rollback to 7950 ==========
+========== Introducing an error at iteration 7991, rate = 0.001550, rank = 217 ==========
+========== Error detected at 8010 for p*q = -1.557575e-12 ==========
+========== Rollback to 7950 ==========
+========== Introducing an error at iteration 8136, rate = 0.004440, rank = 165 ==========
+========== Introducing an error at iteration 8140, rate = 0.005150, rank = 106 ==========
+========== Error detected at 8160 for p*q = -5.380423e-13 ==========
+========== Rollback to 8130 ==========
+========== Introducing an error at iteration 8178, rate = 0.009410, rank = 475 ==========
+========== Error detected at 8190 for p*q = -5.380423e-13 ==========
+========== Rollback to 8130 ==========
+========== Introducing an error at iteration 8194, rate = 0.002170, rank = 494 ==========
+========== Introducing an error at iteration 8203, rate = 0.009620, rank = 443 ==========
+========== Error detected at 8220 for p*q = -5.380423e-13 ==========
+========== Rollback to 8130 ==========
+========== Introducing an error at iteration 8312, rate = 0.008680, rank = 63 ==========
+========== Error detected at 8340 for p*q = -5.317086e-12 ==========
+========== Rollback to 8310 ==========
+========== Introducing an error at iteration 8478, rate = 0.000650, rank = 376 ==========
+========== Introducing an error at iteration 8486, rate = 0.007130, rank = 173 ==========
+========== Error detected at 8490 for p*q = -1.092099e-12 ==========
+========== Rollback to 8460 ==========
+========== Introducing an error at iteration 8713, rate = 0.007360, rank = 265 ==========
+========== Error detected at 8730 for p*q = -1.204463e-10 ==========
+========== Rollback to 8700 ==========
+========== Introducing an error at iteration 8737, rate = 0.009970, rank = 163 ==========
+========== Error detected at 8760 for p*q = -1.204463e-10 ==========
+========== Rollback to 8700 ==========
+========== Introducing an error at iteration 8768, rate = 0.003090, rank = 470 ==========
+========== Introducing an error at iteration 8786, rate = 0.000050, rank = 81 ==========
+========== Error detected at 8790 for p*q = -1.204463e-10 ==========
+========== Rollback to 8700 ==========
+========== Introducing an error at iteration 9106, rate = 0.005370, rank = 0 ==========
+========== Error detected at 9120 for p*q = -5.265279e-12 ==========
+========== Rollback to 9090 ==========
+========== Introducing an error at iteration 9339, rate = 0.001620, rank = 276 ==========
+========== Error detected at 9360 for p*q = -7.716839e-13 ==========
+========== Rollback to 9330 ==========
+========== Introducing an error at iteration 9439, rate = 0.006690, rank = 281 ==========
+========== Error detected at 9450 for p*q = -5.453241e-13 ==========
+========== Rollback to 9420 ==========
+========== Introducing an error at iteration 9528, rate = 0.007430, rank = 162 ==========
+========== Error detected at 9540 for p*q = -5.090257e-12 ==========
+========== Rollback to 9510 ==========
+========== Introducing an error at iteration 9634, rate = 0.005800, rank = 423 ==========
+========== Error detected at 9660 for p*q = -2.760280e-12 ==========
+========== Rollback to 9630 ==========
+========== Introducing an error at iteration 9781, rate = 0.007930, rank = 263 ==========
+========== Error detected at 9810 for p*q = -5.499812e-13 ==========
+========== Rollback to 9780 ==========
+========== Introducing an error at iteration 10294, rate = 0.009510, rank = 481 ==========
+========== Error detected at 10320 for p*q = -1.436775e-13 ==========
+========== Rollback to 10290 ==========
+========== Introducing an error at iteration 10376, rate = 0.004620, rank = 334 ==========
+========== Error detected at 10380 for p*q = -2.041134e-13 ==========
+========== Rollback to 10350 ==========
+========== Introducing an error at iteration 10486, rate = 0.000140, rank = 277 ==========
+========== Error detected at 10500 for p*q = -2.638183e-13 ==========
+========== Rollback to 10470 ==========
+========== Introducing an error at iteration 10664, rate = 0.009900, rank = 223 ==========
+========== Error detected at 10680 for p*q = -2.942134e-13 ==========
+========== Rollback to 10650 ==========
+========== Introducing an error at iteration 10778, rate = 0.005980, rank = 374 ==========
+========== Error detected at 10800 for p*q = -3.600448e-12 ==========
+========== Rollback to 10770 ==========
+========== Introducing an error at iteration 10850, rate = 0.004800, rank = 9 ==========
+========== Introducing an error at iteration 10860, rate = 0.009360, rank = 449 ==========
+========== Error detected at 10860 for p*q = -1.022488e-02 ==========
+========== Rollback to 10830 ==========
+========== Introducing an error at iteration 10976, rate = 0.002280, rank = 495 ==========
+========== Error detected at 10980 for p*q = -9.227799e-13 ==========
+========== Rollback to 10950 ==========
+========== Introducing an error at iteration 11026, rate = 0.002510, rank = 140 ==========
+========== Error detected at 11040 for p*q = -2.803611e-12 ==========
+========== Rollback to 11010 ==========
+========== Introducing an error at iteration 11111, rate = 0.003020, rank = 451 ==========
+========== Error detected at 11130 for p*q = -4.234935e-12 ==========
+========== Rollback to 11100 ==========
+========== Introducing an error at iteration 11232, rate = 0.009270, rank = 355 ==========
+========== Error detected at 11250 for p*q = -2.447506e-12 ==========
+========== Rollback to 11220 ==========
+========== Introducing an error at iteration 11341, rate = 0.008270, rank = 298 ==========
+========== Error detected at 11370 for p*q = -6.835049e-12 ==========
+========== Rollback to 11340 ==========
+========== Introducing an error at iteration 11462, rate = 0.008330, rank = 279 ==========
+========== Introducing an error at iteration 11477, rate = 0.009860, rank = 227 ==========
+========== Error detected at 11490 for p*q = -3.687205e-11 ==========
+========== Rollback to 11460 ==========
+========== Introducing an error at iteration 11778, rate = 0.001800, rank = 454 ==========
+========== Introducing an error at iteration 11784, rate = 0.007760, rank = 371 ==========
+========== Error detected at 11790 for p*q = -7.591299e-11 ==========
+========== Rollback to 11760 ==========
+========== Introducing an error at iteration 11926, rate = 0.003750, rank = 226 ==========
+========== Error detected at 11940 for p*q = -1.138713e-10 ==========
+========== Rollback to 11910 ==========
+========== Introducing an error at iteration 11966, rate = 0.005510, rank = 223 ==========
+========== Error detected at 11970 for p*q = -1.138713e-10 ==========
+========== Rollback to 11910 ==========
+========== Introducing an error at iteration 12436, rate = 0.009980, rank = 329 ==========
+========== Introducing an error at iteration 12445, rate = 0.005440, rank = 220 ==========
+========== Error detected at 12450 for p*q = -1.345295e-13 ==========
+========== Rollback to 12420 ==========
+========== Introducing an error at iteration 12459, rate = 0.005950, rank = 83 ==========
+========== Error detected at 12480 for p*q = -1.345295e-13 ==========
+========== Rollback to 12420 ==========
+========== Introducing an error at iteration 12591, rate = 0.004230, rank = 456 ==========
+========== Error detected at 12600 for p*q = -5.844488e-13 ==========
+========== Rollback to 12570 ==========
+========== Introducing an error at iteration 12972, rate = 0.005770, rank = 266 ==========
+========== Error detected at 12990 for p*q = 1.933018e-14 ==========
+========== Rollback to 12960 ==========
+========== Introducing an error at iteration 13143, rate = 0.003350, rank = 147 ==========
+========== Error detected at 13170 for p*q = 2.574610e-12 ==========
+========== Rollback to 13140 ==========
+========== Introducing an error at iteration 13306, rate = 0.009720, rank = 461 ==========
+========== Error detected at 13320 for p*q = 6.340490e-12 ==========
+========== Rollback to 13290 ==========
+========== Introducing an error at iteration 13342, rate = 0.007540, rank = 142 ==========
+========== Error detected at 13350 for p*q = 6.340490e-12 ==========
+========== Rollback to 13290 ==========
+========== Introducing an error at iteration 13381, rate = 0.003450, rank = 474 ==========
+========== Error detected at 13410 for p*q = 2.617863e-12 ==========
+========== Rollback to 13380 ==========
+========== Introducing an error at iteration 13446, rate = 0.008910, rank = 435 ==========
+========== Introducing an error at iteration 13454, rate = 0.009480, rank = 111 ==========
+========== Error detected at 13470 for p*q = 2.544698e-12 ==========
+========== Rollback to 13440 ==========
+========== Introducing an error at iteration 13524, rate = 0.007140, rank = 208 ==========
+========== Error detected at 13530 for p*q = 2.247923e-12 ==========
+========== Rollback to 13500 ==========
+========== Introducing an error at iteration 13591, rate = 0.001590, rank = 380 ==========
+========== Error detected at 13620 for p*q = 2.710067e-12 ==========
+========== Rollback to 13590 ==========
+========== Introducing an error at iteration 13682, rate = 0.009990, rank = 155 ==========
+========== Error detected at 13710 for p*q = 2.433393e-11 ==========
+========== Rollback to 13680 ==========
+========== Introducing an error at iteration 13838, rate = 0.004950, rank = 426 ==========
+========== Error detected at 13860 for p*q = 1.996678e-11 ==========
+========== Rollback to 13830 ==========
+========== Introducing an error at iteration 13861, rate = 0.002730, rank = 485 ==========
+========== Error detected at 13890 for p*q = 1.996678e-11 ==========
+========== Rollback to 13830 ==========
+========== Introducing an error at iteration 13902, rate = 0.009850, rank = 28 ==========
+========== Error detected at 13920 for p*q = 1.996678e-11 ==========
+========== Rollback to 13830 ==========
+========== Introducing an error at iteration 13937, rate = 0.004950, rank = 161 ==========
+========== Error detected at 13950 for p*q = 1.996678e-11 ==========
+========== Rollback to 13830 ==========
+========== Introducing an error at iteration 13982, rate = 0.003970, rank = 121 ==========
+========== Error detected at 14010 for p*q = 1.181459e-11 ==========
+========== Rollback to 13980 ==========
+========== Introducing an error at iteration 14039, rate = 0.009190, rank = 322 ==========
+========== Error detected at 14040 for p*q = 1.181459e-11 ==========
+========== Rollback to 13980 ==========
+========== Introducing an error at iteration 14134, rate = 0.000150, rank = 159 ==========
+========== Introducing an error at iteration 14139, rate = 0.000300, rank = 152 ==========
+========== Error detected at 14160 for p*q = 4.548796e-12 ==========
+========== Rollback to 14130 ==========
+========== Introducing an error at iteration 14424, rate = 0.007020, rank = 452 ==========
+========== Error detected at 14430 for p*q = 1.699505e-11 ==========
+========== Rollback to 14400 ==========
+========== Introducing an error at iteration 14690, rate = 0.008110, rank = 236 ==========
+========== Error detected at 14700 for p*q = 9.790923e-11 ==========
+========== Rollback to 14670 ==========
+========== Introducing an error at iteration 14797, rate = 0.007370, rank = 63 ==========
+========== Introducing an error at iteration 14805, rate = 0.008760, rank = 164 ==========
+========== Error detected at 14820 for p*q = 7.788278e-12 ==========
+========== Rollback to 14790 ==========
+========== Introducing an error at iteration 14867, rate = 0.005440, rank = 54 ==========
+========== Error detected at 14880 for p*q = 2.130624e-11 ==========
+========== Rollback to 14850 ==========
+========== Introducing an error at iteration 14910, rate = 0.006450, rank = 61 ==========
+========== Error detected at 14910 for p*q = 3.719604e-04 ==========
+========== Rollback to 14850 ==========
+CG: number of iterations     = 15092 (double = 15092, quad = 0)
+CG: elapsed time             = 8.556738e+00 sec.
+CG:   preconditioner         = 1.239371e-02 sec.
+CG:     matrix creation      = 0.000000e+00 sec.
+CG:   linear solver          = 8.544344e+00 sec.
+CG: relative residual 2-norm = 9.548154e-13
+
+CG: number of iterations     = 15092 (double = 15092, quad = 0)
+=== CG:   average linear solver          = 8.556738e+00 sec.

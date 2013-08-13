@@ -1,0 +1,5 @@
+
+number of processes = 512
+matrix size = 36417 x 36417 (2190591 nonzero entries)
+CG: number of iterations     = 10988 (double = 10988, quad = 0)
+=== CG:   average linear solver          = 5.893263e+00 sec.

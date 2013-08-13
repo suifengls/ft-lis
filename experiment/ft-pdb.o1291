@@ -1,0 +1,396 @@
+
+number of processes = 512
+matrix size = 36417 x 36417 (2190591 nonzero entries)
+========== Error detected in R: 1.483556e+00 (eps = 1.000000e-04) at iteration 100 ==========
+sum of R = -3.064869e+06, checksum = -1.234065e+06
+========== Rollback to itertion 50 ==========
+========== Error detected in R: 5.770809e-02 (eps = 1.000000e-04) at iteration 250 ==========
+sum of R = -1.305278e+06, checksum = -1.234062e+06
+========== Rollback to itertion 200 ==========
+========== Error detected in R: 7.970772e+00 (eps = 1.000000e-04) at iteration 400 ==========
+sum of R = -1.107046e+07, checksum = -1.234059e+06
+========== Rollback to itertion 350 ==========
+========== Error detected in R: 5.312979e+00 (eps = 1.000000e-04) at iteration 450 ==========
+sum of R = -7.790589e+06, checksum = -1.234059e+06
+========== Rollback to itertion 350 ==========
+========== Error detected in R: 5.960032e+00 (eps = 1.000000e-04) at iteration 500 ==========
+sum of R = -8.589087e+06, checksum = -1.234059e+06
+========== Rollback to itertion 350 ==========
+========== Error detected in R: 3.191150e+00 (eps = 1.000000e-04) at iteration 650 ==========
+sum of R = 2.703999e+06, checksum = -1.234055e+06
+========== Rollback to itertion 600 ==========
+========== Error detected in R: 4.856745e+00 (eps = 1.000000e-04) at iteration 900 ==========
+sum of R = -7.227201e+06, checksum = -1.233996e+06
+========== Rollback to itertion 850 ==========
+========== Error detected in R: 1.993287e+00 (eps = 1.000000e-04) at iteration 1050 ==========
+sum of R = 1.225672e+06, checksum = -1.233956e+06
+========== Rollback to itertion 1000 ==========
+========== Error detected in R: 1.494562e+01 (eps = 1.000000e-04) at iteration 1150 ==========
+sum of R = -1.967552e+07, checksum = -1.233914e+06
+========== Rollback to itertion 1100 ==========
+========== Error detected in R: 5.692786e-01 (eps = 1.000000e-04) at iteration 1200 ==========
+sum of R = -1.936343e+06, checksum = -1.233906e+06
+========== Rollback to itertion 1100 ==========
+========== Error detected in R: 3.555408e+00 (eps = 1.000000e-04) at iteration 1250 ==========
+sum of R = 3.153177e+06, checksum = -1.233923e+06
+========== Rollback to itertion 1100 ==========
+========== Error detected in R: 3.139679e+00 (eps = 1.000000e-04) at iteration 1350 ==========
+sum of R = -5.107931e+06, checksum = -1.233895e+06
+========== Rollback to itertion 1300 ==========
+========== Error detected in R: 2.532759e+00 (eps = 1.000000e-04) at iteration 1600 ==========
+sum of R = -4.358436e+06, checksum = -1.233720e+06
+========== Rollback to itertion 1550 ==========
+========== Error detected in R: 8.440641e-01 (eps = 1.000000e-04) at iteration 1650 ==========
+sum of R = -2.275057e+06, checksum = -1.233719e+06
+========== Rollback to itertion 1550 ==========
+========== Error detected in R: 9.463620e+00 (eps = 1.000000e-04) at iteration 1800 ==========
+sum of R = -1.290604e+07, checksum = -1.233420e+06
+========== Rollback to itertion 1750 ==========
+========== Error detected in R: 1.955226e+00 (eps = 1.000000e-04) at iteration 1850 ==========
+sum of R = 1.178202e+06, checksum = -1.233427e+06
+========== Rollback to itertion 1750 ==========
+========== Error detected in R: 2.826829e+00 (eps = 1.000000e-04) at iteration 1900 ==========
+sum of R = -4.718973e+06, checksum = -1.233129e+06
+========== Rollback to itertion 1750 ==========
+========== Error detected in R: 3.722205e+00 (eps = 1.000000e-04) at iteration 2150 ==========
+sum of R = -5.822321e+06, checksum = -1.232967e+06
+========== Rollback to itertion 2100 ==========
+========== Error detected in R: 1.438441e+01 (eps = 1.000000e-04) at iteration 2300 ==========
+sum of R = -1.895495e+07, checksum = -1.232088e+06
+========== Rollback to itertion 2250 ==========
+========== Error detected in R: 8.476031e+00 (eps = 1.000000e-04) at iteration 2350 ==========
+sum of R = -1.167542e+07, checksum = -1.232100e+06
+========== Rollback to itertion 2250 ==========
+========== Error detected in R: 1.583474e+00 (eps = 1.000000e-04) at iteration 2450 ==========
+sum of R = -3.183067e+06, checksum = -1.232088e+06
+========== Rollback to itertion 2400 ==========
+========== Error detected in R: 2.006563e+01 (eps = 1.000000e-04) at iteration 2550 ==========
+sum of R = -2.587957e+07, checksum = -1.228521e+06
+========== Rollback to itertion 2500 ==========
+========== Error detected in R: 7.111393e+00 (eps = 1.000000e-04) at iteration 2650 ==========
+sum of R = -9.978156e+06, checksum = -1.230141e+06
+========== Rollback to itertion 2600 ==========
+========== Error detected in R: 1.400668e+01 (eps = 1.000000e-04) at iteration 2700 ==========
+sum of R = -1.846101e+07, checksum = -1.230186e+06
+========== Rollback to itertion 2600 ==========
+========== Error detected in R: 1.087031e+02 (eps = 1.000000e-04) at iteration 2850 ==========
+sum of R = -1.340216e+08, checksum = -1.221676e+06
+========== Rollback to itertion 2800 ==========
+========== Error detected in R: 8.212039e+00 (eps = 1.000000e-04) at iteration 3050 ==========
+sum of R = 3.123178e+06, checksum = -4.330506e+05
+========== Rollback to itertion 3000 ==========
+========== Error detected in R: 4.716187e+02 (eps = 1.000000e-04) at iteration 3200 ==========
+sum of R = 2.683170e+07, checksum = -5.701368e+04
+========== Rollback to itertion 3150 ==========
+========== Error detected in R: 6.884027e+03 (eps = 1.000000e-04) at iteration 3400 ==========
+sum of R = 5.806395e+07, checksum = 8.433365e+03
+========== Rollback to itertion 3350 ==========
+========== Error detected in R: 2.592087e+00 (eps = 1.000000e-04) at iteration 4000 ==========
+sum of R = -1.345353e+04, checksum = 8.450249e+03
+========== Rollback to itertion 3950 ==========
+========== Error detected in R: 4.993311e+00 (eps = 1.000000e-04) at iteration 4050 ==========
+sum of R = 5.064497e+04, checksum = 8.450249e+03
+========== Rollback to itertion 3950 ==========
+========== Error detected in R: 3.934549e+00 (eps = 1.000000e-04) at iteration 4100 ==========
+sum of R = -2.479767e+04, checksum = 8.450249e+03
+========== Rollback to itertion 3950 ==========
+========== Error detected in R: 9.230602e-01 (eps = 1.000000e-04) at iteration 4150 ==========
+sum of R = 6.501605e+02, checksum = 8.450249e+03
+========== Rollback to itertion 3950 ==========
+========== Error detected in R: 9.166177e+00 (eps = 1.000000e-04) at iteration 4250 ==========
+sum of R = -6.900619e+04, checksum = 8.450244e+03
+========== Rollback to itertion 4200 ==========
+========== Error detected in R: 1.600326e+00 (eps = 1.000000e-04) at iteration 4400 ==========
+sum of R = -5.066823e+03, checksum = 8.440118e+03
+========== Rollback to itertion 4350 ==========
+========== Error detected in R: 1.254463e+00 (eps = 1.000000e-04) at iteration 4450 ==========
+sum of R = 1.903649e+04, checksum = 8.443910e+03
+========== Rollback to itertion 4350 ==========
+========== Error detected in R: 1.207608e+00 (eps = 1.000000e-04) at iteration 4600 ==========
+sum of R = -1.734960e+03, checksum = 8.356891e+03
+========== Rollback to itertion 4550 ==========
+========== Error detected in R: 2.940676e+00 (eps = 1.000000e-04) at iteration 4700 ==========
+sum of R = 2.866019e+04, checksum = 7.272912e+03
+========== Rollback to itertion 4650 ==========
+========== Error detected in R: 4.635052e+00 (eps = 1.000000e-04) at iteration 5000 ==========
+sum of R = -9.889966e+03, checksum = 2.720722e+03
+========== Rollback to itertion 4950 ==========
+========== Error detected in R: 1.381395e+01 (eps = 1.000000e-04) at iteration 5200 ==========
+sum of R = -3.028907e+04, checksum = 2.363757e+03
+========== Rollback to itertion 5150 ==========
+========== Error detected in R: 1.317068e+01 (eps = 1.000000e-04) at iteration 5250 ==========
+sum of R = -2.413766e+04, checksum = 1.983264e+03
+========== Rollback to itertion 5150 ==========
+========== Error detected in R: 2.607502e+01 (eps = 1.000000e-04) at iteration 5300 ==========
+sum of R = 5.567440e+04, checksum = 2.056301e+03
+========== Rollback to itertion 5150 ==========
+========== Error detected in R: 2.512993e+00 (eps = 1.000000e-04) at iteration 5350 ==========
+sum of R = -3.721385e+03, checksum = 2.459618e+03
+========== Rollback to itertion 5150 ==========
+========== Error detected in R: 1.689801e+01 (eps = 1.000000e-04) at iteration 5450 ==========
+sum of R = -2.947198e+04, checksum = 1.853816e+03
+========== Rollback to itertion 5400 ==========
+========== Error detected in R: 7.011502e+00 (eps = 1.000000e-04) at iteration 5600 ==========
+sum of R = -8.515929e+03, checksum = 1.416606e+03
+========== Rollback to itertion 5550 ==========
+========== Error detected in R: 9.162502e+00 (eps = 1.000000e-04) at iteration 5650 ==========
+sum of R = -1.248843e+04, checksum = 1.529976e+03
+========== Rollback to itertion 5550 ==========
+========== Error detected in R: 1.459046e+01 (eps = 1.000000e-04) at iteration 5700 ==========
+sum of R = -2.091406e+04, checksum = 1.538878e+03
+========== Rollback to itertion 5550 ==========
+========== Error detected in R: 4.971400e+01 (eps = 1.000000e-04) at iteration 5750 ==========
+sum of R = 8.344428e+04, checksum = 1.645389e+03
+========== Rollback to itertion 5550 ==========
+========== Error detected in R: 1.271542e+01 (eps = 1.000000e-04) at iteration 5800 ==========
+sum of R = -1.698294e+04, checksum = 1.449622e+03
+========== Rollback to itertion 5550 ==========
+========== Error detected in R: 1.684498e+01 (eps = 1.000000e-04) at iteration 5850 ==========
+sum of R = -2.586668e+04, checksum = 1.632484e+03
+========== Rollback to itertion 5550 ==========
+========== Error detected in R: 3.073622e+01 (eps = 1.000000e-04) at iteration 6000 ==========
+sum of R = -1.447817e+04, checksum = 4.868867e+02
+========== Rollback to itertion 5950 ==========
+========== Error detected in R: 1.355681e+02 (eps = 1.000000e-04) at iteration 6100 ==========
+sum of R = 6.126647e+04, checksum = 4.486146e+02
+========== Rollback to itertion 6050 ==========
+========== Error detected in R: 6.054350e+01 (eps = 1.000000e-04) at iteration 6200 ==========
+sum of R = 1.915385e+04, checksum = 3.112246e+02
+========== Rollback to itertion 6150 ==========
+========== Error detected in R: 1.173119e+04 (eps = 1.000000e-04) at iteration 6700 ==========
+sum of R = 6.574008e+04, checksum = 5.603393e+00
+========== Rollback to itertion 6650 ==========
+========== Error detected in R: 6.957768e+03 (eps = 1.000000e-04) at iteration 6750 ==========
+sum of R = -3.961015e+04, checksum = 5.693758e+00
+========== Rollback to itertion 6650 ==========
+========== Error detected in R: 9.828714e+03 (eps = 1.000000e-04) at iteration 6850 ==========
+sum of R = -5.085427e+04, checksum = 5.174578e+00
+========== Rollback to itertion 6800 ==========
+========== Error detected in R: 2.437999e+03 (eps = 1.000000e-04) at iteration 7250 ==========
+sum of R = -1.027751e+04, checksum = 4.217282e+00
+========== Rollback to itertion 7200 ==========
+========== Error detected in R: 4.964848e+03 (eps = 1.000000e-04) at iteration 7350 ==========
+sum of R = -2.092600e+04, checksum = 4.215681e+00
+========== Rollback to itertion 7300 ==========
+========== Error detected in R: 2.186308e+02 (eps = 1.000000e-04) at iteration 8000 ==========
+sum of R = 8.936267e+02, checksum = 4.068768e+00
+========== Rollback to itertion 7950 ==========
+========== Error detected in R: 3.623698e+02 (eps = 1.000000e-04) at iteration 8150 ==========
+sum of R = 8.672896e+01, checksum = 2.386796e-01
+========== Rollback to itertion 8100 ==========
+========== Error detected in R: 2.063515e+03 (eps = 1.000000e-04) at iteration 8200 ==========
+sum of R = 5.270829e+02, checksum = 2.553059e-01
+========== Rollback to itertion 8100 ==========
+========== Error detected in R: 1.738535e+02 (eps = 1.000000e-04) at iteration 8250 ==========
+sum of R = -5.585889e+01, checksum = 3.231574e-01
+========== Rollback to itertion 8100 ==========
+========== Error detected in R: 1.666830e+03 (eps = 1.000000e-04) at iteration 8350 ==========
+sum of R = -3.308538e+02, checksum = 1.986120e-01
+========== Rollback to itertion 8300 ==========
+========== Error detected in R: 2.278244e+03 (eps = 1.000000e-04) at iteration 8500 ==========
+sum of R = 8.459221e+01, checksum = 3.711415e-02
+========== Rollback to itertion 8450 ==========
+========== Error detected in R: 1.689099e+04 (eps = 1.000000e-04) at iteration 8750 ==========
+sum of R = 2.449688e+02, checksum = 1.450207e-02
+========== Rollback to itertion 8700 ==========
+========== Error detected in R: 3.977359e+03 (eps = 1.000000e-04) at iteration 8800 ==========
+sum of R = -5.416861e+01, checksum = 1.362267e-02
+========== Rollback to itertion 8700 ==========
+========== Error detected in R: 1.674990e+03 (eps = 1.000000e-04) at iteration 9150 ==========
+sum of R = -5.229598e+01, checksum = -3.120304e-02
+========== Rollback to itertion 9100 ==========
+========== Error detected in R: 9.519478e+02 (eps = 1.000000e-04) at iteration 9350 ==========
+sum of R = 3.160280e+01, checksum = -3.323294e-02
+========== Rollback to itertion 9300 ==========
+========== Error detected in R: 1.089721e+03 (eps = 1.000000e-04) at iteration 9450 ==========
+sum of R = 3.629733e+01, checksum = -3.333943e-02
+========== Rollback to itertion 9400 ==========
+========== Error detected in R: 2.184876e+03 (eps = 1.000000e-04) at iteration 9550 ==========
+sum of R = 7.282160e+01, checksum = -3.334512e-02
+========== Rollback to itertion 9500 ==========
+========== Error detected in R: 3.573934e+03 (eps = 1.000000e-04) at iteration 9650 ==========
+sum of R = -1.192434e+02, checksum = -3.335542e-02
+========== Rollback to itertion 9600 ==========
+========== Error detected in R: 1.900537e+04 (eps = 1.000000e-04) at iteration 9800 ==========
+sum of R = -6.342387e+02, checksum = -3.336980e-02
+========== Rollback to itertion 9750 ==========
+========== Error detected in R: 7.978615e+01 (eps = 1.000000e-04) at iteration 10300 ==========
+sum of R = 2.629085e+00, checksum = -3.336989e-02
+========== Rollback to itertion 10250 ==========
+========== Error detected in R: 6.028353e+01 (eps = 1.000000e-04) at iteration 10400 ==========
+sum of R = 1.978284e+00, checksum = -3.336988e-02
+========== Rollback to itertion 10350 ==========
+========== Error detected in R: 1.002840e+01 (eps = 1.000000e-04) at iteration 10500 ==========
+sum of R = 3.012764e-01, checksum = -3.336987e-02
+========== Rollback to itertion 10450 ==========
+========== Error detected in R: 6.752575e+00 (eps = 1.000000e-04) at iteration 10700 ==========
+sum of R = 1.919621e-01, checksum = -3.336977e-02
+========== Rollback to itertion 10650 ==========
+========== Error detected in R: 1.790410e+00 (eps = 1.000000e-04) at iteration 10800 ==========
+sum of R = 2.637579e-02, checksum = -3.336976e-02
+========== Rollback to itertion 10750 ==========
+========== Error detected in R: 2.127878e+00 (eps = 1.000000e-04) at iteration 10850 ==========
+sum of R = -1.043765e-01, checksum = -3.336976e-02
+========== Rollback to itertion 10750 ==========
+========== Error detected in R: 3.771546e+00 (eps = 1.000000e-04) at iteration 10900 ==========
+sum of R = 9.248584e-02, checksum = -3.336976e-02
+========== Rollback to itertion 10750 ==========
+========== Error detected in R: 5.407888e-01 (eps = 1.000000e-04) at iteration 11000 ==========
+sum of R = -1.532377e-02, checksum = -3.336976e-02
+========== Rollback to itertion 10950 ==========
+========== Error detected in R: 8.618891e+00 (eps = 1.000000e-04) at iteration 11050 ==========
+sum of R = 2.542406e-01, checksum = -3.336976e-02
+========== Rollback to itertion 10950 ==========
+========== Error detected in R: 3.117815e+00 (eps = 1.000000e-04) at iteration 11150 ==========
+sum of R = 7.067096e-02, checksum = -3.336976e-02
+========== Rollback to itertion 11100 ==========
+========== Error detected in R: 2.138276e+00 (eps = 1.000000e-04) at iteration 11250 ==========
+sum of R = 3.798393e-02, checksum = -3.336969e-02
+========== Rollback to itertion 11200 ==========
+========== Error detected in R: 6.140951e+01 (eps = 1.000000e-04) at iteration 11350 ==========
+sum of R = 2.015423e+00, checksum = -3.336268e-02
+========== Rollback to itertion 11300 ==========
+========== Error detected in R: 2.196655e+01 (eps = 1.000000e-04) at iteration 11500 ==========
+sum of R = -7.660426e-01, checksum = -3.335471e-02
+========== Rollback to itertion 11450 ==========
+========== Error detected in R: 1.649831e+01 (eps = 1.000000e-04) at iteration 11800 ==========
+sum of R = 1.722963e-01, checksum = -1.111711e-02
+========== Rollback to itertion 11750 ==========
+========== Error detected in R: 1.153861e+02 (eps = 1.000000e-04) at iteration 11950 ==========
+sum of R = 4.651795e-02, checksum = -4.066751e-04
+========== Rollback to itertion 11900 ==========
+========== Error detected in R: 2.029411e+02 (eps = 1.000000e-04) at iteration 12000 ==========
+sum of R = 1.167747e-01, checksum = -5.782610e-04
+========== Rollback to itertion 11900 ==========
+========== Error detected in R: 2.581530e+04 (eps = 1.000000e-04) at iteration 12450 ==========
+sum of R = 7.937576e-01, checksum = -3.074876e-05
+========== Rollback to itertion 12400 ==========
+========== Error detected in R: 3.648711e+03 (eps = 1.000000e-04) at iteration 12500 ==========
+sum of R = -1.135152e-01, checksum = -3.110251e-05
+========== Rollback to itertion 12400 ==========
+========== Error detected in R: 8.548097e+02 (eps = 1.000000e-04) at iteration 12600 ==========
+sum of R = 2.619368e-02, checksum = -3.067859e-05
+========== Rollback to itertion 12550 ==========
+========== Error detected in R: 1.996206e+03 (eps = 1.000000e-04) at iteration 13000 ==========
+sum of R = 5.840167e-02, checksum = -2.927100e-05
+========== Rollback to itertion 12950 ==========
+========== Error detected in R: 6.808361e+02 (eps = 1.000000e-04) at iteration 13150 ==========
+sum of R = 1.989140e-02, checksum = -2.925911e-05
+========== Rollback to itertion 13100 ==========
+========== Error detected in R: 1.627359e+03 (eps = 1.000000e-04) at iteration 13350 ==========
+sum of R = -4.764419e-02, checksum = -2.925903e-05
+========== Rollback to itertion 13300 ==========
+========== Error detected in R: 4.754017e+02 (eps = 1.000000e-04) at iteration 13400 ==========
+sum of R = -1.393905e-02, checksum = -2.925903e-05
+========== Rollback to itertion 13300 ==========
+========== Error detected in R: 1.161815e+02 (eps = 1.000000e-04) at iteration 13450 ==========
+sum of R = 3.370099e-03, checksum = -2.925903e-05
+========== Rollback to itertion 13300 ==========
+========== Error detected in R: 1.301186e+03 (eps = 1.000000e-04) at iteration 13500 ==========
+sum of R = 3.804217e-02, checksum = -2.925903e-05
+========== Rollback to itertion 13300 ==========
+========== Error detected in R: 3.348669e+02 (eps = 1.000000e-04) at iteration 13550 ==========
+sum of R = 9.768620e-03, checksum = -2.925903e-05
+========== Rollback to itertion 13300 ==========
+========== Error detected in R: 2.046480e+02 (eps = 1.000000e-04) at iteration 13600 ==========
+sum of R = 5.958543e-03, checksum = -2.925903e-05
+========== Rollback to itertion 13300 ==========
+========== Error detected in R: 7.160078e+02 (eps = 1.000000e-04) at iteration 13700 ==========
+sum of R = 2.092043e-02, checksum = -2.925902e-05
+========== Rollback to itertion 13650 ==========
+========== Error detected in R: 2.222580e+02 (eps = 1.000000e-04) at iteration 13850 ==========
+sum of R = 6.473786e-03, checksum = -2.925899e-05
+========== Rollback to itertion 13800 ==========
+========== Error detected in R: 2.117583e+02 (eps = 1.000000e-04) at iteration 13900 ==========
+sum of R = 6.166575e-03, checksum = -2.925899e-05
+========== Rollback to itertion 13800 ==========
+========== Error detected in R: 1.564552e+02 (eps = 1.000000e-04) at iteration 13950 ==========
+sum of R = -4.606979e-03, checksum = -2.925898e-05
+========== Rollback to itertion 13800 ==========
+========== Error detected in R: 8.244035e+01 (eps = 1.000000e-04) at iteration 14000 ==========
+sum of R = -2.441380e-03, checksum = -2.925899e-05
+========== Rollback to itertion 13800 ==========
+========== Error detected in R: 8.751357e+02 (eps = 1.000000e-04) at iteration 14050 ==========
+sum of R = 2.557633e-02, checksum = -2.925899e-05
+========== Rollback to itertion 13800 ==========
+========== Error detected in R: 8.464654e-01 (eps = 1.000000e-04) at iteration 14150 ==========
+sum of R = -5.402571e-05, checksum = -2.925899e-05
+========== Rollback to itertion 14100 ==========
+========== Error detected in R: 7.314277e+00 (eps = 1.000000e-04) at iteration 14450 ==========
+sum of R = 1.846100e-04, checksum = -2.923691e-05
+========== Rollback to itertion 14400 ==========
+========== Error detected in R: 3.529970e+00 (eps = 1.000000e-04) at iteration 14700 ==========
+sum of R = -1.308466e-04, checksum = -2.888464e-05
+========== Rollback to itertion 14650 ==========
+========== Error detected in R: 1.109756e+01 (eps = 1.000000e-04) at iteration 14800 ==========
+sum of R = 2.916230e-04, checksum = -2.888054e-05
+========== Rollback to itertion 14750 ==========
+========== Error detected in R: 1.525846e+00 (eps = 1.000000e-04) at iteration 14850 ==========
+sum of R = 1.518762e-05, checksum = -2.888227e-05
+========== Rollback to itertion 14750 ==========
+========== Error detected in R: 6.702289e+00 (eps = 1.000000e-04) at iteration 14900 ==========
+sum of R = -2.224559e-04, checksum = -2.888179e-05
+========== Rollback to itertion 14750 ==========
+========== Error detected in R: 4.608050e+01 (eps = 1.000000e-04) at iteration 14950 ==========
+sum of R = -1.359750e-03, checksum = -2.888138e-05
+========== Rollback to itertion 14750 ==========
+========== Error detected in R: 9.164356e+00 (eps = 1.000000e-04) at iteration 15300 ==========
+sum of R = 2.211922e-04, checksum = -2.709243e-05
+========== Rollback to itertion 15250 ==========
+========== Error detected in R: 8.208132e+00 (eps = 1.000000e-04) at iteration 15450 ==========
+sum of R = 1.909662e-04, checksum = -2.649317e-05
+========== Rollback to itertion 15400 ==========
+========== Error detected in R: 1.410240e+00 (eps = 1.000000e-04) at iteration 15600 ==========
+sum of R = -5.966856e-05, checksum = -2.475627e-05
+========== Rollback to itertion 15550 ==========
+========== Error detected in R: 6.765592e+00 (eps = 1.000000e-04) at iteration 15650 ==========
+sum of R = 1.427132e-04, checksum = -2.475257e-05
+========== Rollback to itertion 15550 ==========
+========== Error detected in R: 4.619032e+01 (eps = 1.000000e-04) at iteration 15800 ==========
+sum of R = 8.774290e-05, checksum = -1.941630e-06
+========== Rollback to itertion 15750 ==========
+========== Error detected in R: 1.033194e+01 (eps = 1.000000e-04) at iteration 15850 ==========
+sum of R = 1.612937e-04, checksum = -1.728404e-05
+========== Rollback to itertion 15750 ==========
+========== Error detected in R: 4.753642e+03 (eps = 1.000000e-04) at iteration 16150 ==========
+sum of R = 1.421842e-04, checksum = 2.990429e-08
+========== Rollback to itertion 16100 ==========
+========== Error detected in R: 2.709425e+03 (eps = 1.000000e-04) at iteration 16550 ==========
+sum of R = 9.893765e-05, checksum = 3.650264e-08
+========== Rollback to itertion 16500 ==========
+========== Error detected in R: 3.300209e+04 (eps = 1.000000e-04) at iteration 16600 ==========
+sum of R = -1.204500e-03, checksum = 3.649880e-08
+========== Rollback to itertion 16500 ==========
+========== Error detected in R: 1.191454e+03 (eps = 1.000000e-04) at iteration 16650 ==========
+sum of R = 4.352537e-05, checksum = 3.650066e-08
+========== Rollback to itertion 16500 ==========
+========== Error detected in R: 1.601573e+03 (eps = 1.000000e-04) at iteration 16750 ==========
+sum of R = -5.842487e-05, checksum = 3.650248e-08
+========== Rollback to itertion 16700 ==========
+========== Error detected in R: 2.871499e+03 (eps = 1.000000e-04) at iteration 16900 ==========
+sum of R = 1.048660e-04, checksum = 3.650689e-08
+========== Rollback to itertion 16850 ==========
+========== Error detected in R: 3.696537e+02 (eps = 1.000000e-04) at iteration 17050 ==========
+sum of R = 1.353364e-05, checksum = 3.651288e-08
+========== Rollback to itertion 17000 ==========
+========== Error detected in R: 1.088491e+03 (eps = 1.000000e-04) at iteration 17150 ==========
+sum of R = 3.977966e-05, checksum = 3.651216e-08
+========== Rollback to itertion 17100 ==========
+========== Error detected in R: 1.116602e+03 (eps = 1.000000e-04) at iteration 17200 ==========
+sum of R = 4.080577e-05, checksum = 3.651189e-08
+========== Rollback to itertion 17100 ==========
+========== Error detected in R: 6.404074e+03 (eps = 1.000000e-04) at iteration 17250 ==========
+sum of R = 2.338616e-04, checksum = 3.651193e-08
+========== Rollback to itertion 17100 ==========
+========== Error detected in R: 1.680991e+03 (eps = 1.000000e-04) at iteration 17350 ==========
+sum of R = 6.141333e-05, checksum = 3.651228e-08
+========== Rollback to itertion 17300 ==========
+CG: number of iterations     = 17388 (double = 17388, quad = 0)
+CG: elapsed time             = 9.124924e+00 sec.
+CG:   preconditioner         = 1.318192e-02 sec.
+CG:     matrix creation      = 0.000000e+00 sec.
+CG:   linear solver          = 9.111742e+00 sec.
+CG: relative residual 2-norm = 9.690651e-13
+
+CG: number of iterations     = 17388 (double = 17388, quad = 0)
+=== CG:   average linear solver          = 9.124924e+00 sec.

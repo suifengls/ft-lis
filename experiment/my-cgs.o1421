@@ -1,0 +1,38 @@
+chip0
+
+number of processes = 512
+matrix size = 20082 x 20082 (281150 nonzero entries)
+========== Introducing an error at iteration 467, rate = 0.000820, rank = 421 ==========
+========== Rollback to iteration 450 ==========
+========== Introducing an error at iteration 1181, rate = 0.000310, rank = 257 ==========
+========== Rollback to iteration 1170 ==========
+========== Introducing an error at iteration 1806, rate = 0.000110, rank = 389 ==========
+========== Rollback to iteration 1800 ==========
+========== Introducing an error at iteration 1866, rate = 0.000350, rank = 309 ==========
+========== Rollback to iteration 1860 ==========
+========== Introducing an error at iteration 2719, rate = 0.000970, rank = 245 ==========
+========== Rollback to iteration 2700 ==========
+========== Introducing an error at iteration 4038, rate = 0.000940, rank = 67 ==========
+========== Rollback to iteration 4020 ==========
+========== Introducing an error at iteration 4157, rate = 0.000780, rank = 316 ==========
+========== Rollback to iteration 4140 ==========
+========== Introducing an error at iteration 5506, rate = 0.000450, rank = 404 ==========
+========== Rollback to iteration 5490 ==========
+========== Introducing an error at iteration 8592, rate = 0.000650, rank = 376 ==========
+========== Rollback to iteration 8580 ==========
+========== Introducing an error at iteration 8903, rate = 0.000050, rank = 81 ==========
+========== Rollback to iteration 8880 ==========
+========== Introducing an error at iteration 10612, rate = 0.000140, rank = 277 ==========
+========== Rollback to iteration 10590 ==========
+========== Introducing an error at iteration 14295, rate = 0.000150, rank = 159 ==========
+========== Introducing an error at iteration 14300, rate = 0.000300, rank = 152 ==========
+========== Rollback to iteration 14280 ==========
+CGS: number of iterations     = 15220 (double = 15220, quad = 0)
+CGS: elapsed time             = 3.061532e+01 sec.
+CGS:   preconditioner         = 1.842809e-02 sec.
+CGS:     matrix creation      = 0.000000e+00 sec.
+CGS:   linear solver          = 3.059689e+01 sec.
+CGS: relative residual 2-norm = 6.087305e-13
+
+CGS: number of iterations     = 15220 (double = 15220, quad = 0)
+=== CGS:   average linear solver          = 3.061532e+01 sec.

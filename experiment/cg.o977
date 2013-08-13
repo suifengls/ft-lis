@@ -1,0 +1,11 @@
+Emila_923
+
+number of processes = 512
+matrix size = 923136 x 923136 (20964171 nonzero entries)
+CG: number of iterations     = 687574 (double = 687574, quad = 0)
+CG: elapsed time             = 4.721324e+02 sec.
+CG:   preconditioner         = 3.400184e+00 sec.
+CG:     matrix creation      = 9.536743e-07 sec.
+CG:   linear solver          = 4.687322e+02 sec.
+CG: relative residual 2-norm = 9.904139e-13
+

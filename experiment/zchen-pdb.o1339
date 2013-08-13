@@ -1,0 +1,41 @@
+
+number of processes = 512
+matrix size = 36417 x 36417 (2190591 nonzero entries)
+========== Introducing an error at iteration 436, rate = 0.000820, rank = 421 ==========
+========== Error detected at 450 for p*q = -1.331008e-16 ==========
+========== Rollback to 420 ==========
+========== Introducing an error at iteration 1150, rate = 0.000310, rank = 257 ==========
+========== Error detected at 1170 for p*q = -1.581379e-16 ==========
+========== Rollback to 1140 ==========
+========== Introducing an error at iteration 1775, rate = 0.000110, rank = 389 ==========
+========== Introducing an error at iteration 1835, rate = 0.000350, rank = 309 ==========
+========== Introducing an error at iteration 2688, rate = 0.000970, rank = 245 ==========
+========== Error detected at 2700 for p*q = -5.873024e-12 ==========
+========== Rollback to 2670 ==========
+========== Introducing an error at iteration 4008, rate = 0.000940, rank = 67 ==========
+========== Error detected at 4020 for p*q = -1.490835e-12 ==========
+========== Rollback to 3990 ==========
+========== Introducing an error at iteration 4126, rate = 0.000780, rank = 316 ==========
+========== Error detected at 4140 for p*q = -3.255926e-13 ==========
+========== Rollback to 4110 ==========
+========== Introducing an error at iteration 5475, rate = 0.000450, rank = 404 ==========
+========== Error detected at 5490 for p*q = -2.318469e-13 ==========
+========== Rollback to 5460 ==========
+========== Introducing an error at iteration 8561, rate = 0.000650, rank = 376 ==========
+========== Error detected at 8580 for p*q = -2.803611e-12 ==========
+========== Rollback to 8550 ==========
+========== Introducing an error at iteration 8873, rate = 0.000050, rank = 81 ==========
+========== Error detected at 8880 for p*q = -2.254874e-11 ==========
+========== Rollback to 8850 ==========
+========== Introducing an error at iteration 10581, rate = 0.000140, rank = 277 ==========
+========== Error detected at 10590 for p*q = 2.544698e-12 ==========
+========== Rollback to 10560 ==========
+CG: number of iterations     = 11762 (double = 11762, quad = 0)
+CG: elapsed time             = 6.794315e+00 sec.
+CG:   preconditioner         = 9.898186e-03 sec.
+CG:     matrix creation      = 9.536743e-07 sec.
+CG:   linear solver          = 6.784417e+00 sec.
+CG: relative residual 2-norm = 9.548154e-13
+
+CG: number of iterations     = 11762 (double = 11762, quad = 0)
+=== CG:   average linear solver          = 6.794315e+00 sec.

@@ -1,0 +1,16 @@
+
+number of processes = 512
+matrix size = 62424 x 62424 (1717792 nonzero entries)
+========== Introducing an error at iteration 8831, rate = 0.000050, rank = 81 ==========
+========== Introducing an error at iteration 18583, rate = 0.000090, rank = 268 ==========
+========== Introducing an error at iteration 29167, rate = 0.000090, rank = 48 ==========
+========== Introducing an error at iteration 31088, rate = 0.000020, rank = 87 ==========
+BiCGSTAB: number of iterations     = 34080 (double = 34080, quad = 0)
+BiCGSTAB: elapsed time             = 7.674530e+01 sec.
+BiCGSTAB:   preconditioner         = 7.008219e-02 sec.
+BiCGSTAB:     matrix creation      = 0.000000e+00 sec.
+BiCGSTAB:   linear solver          = 7.667522e+01 sec.
+BiCGSTAB: relative residual 2-norm = 5.992944e-13
+
+BiCGSTAB: number of iterations     = 34080 (double = 34080, quad = 0)
+=== BiCGSTAB:   average linear solver          = 7.674530e+01 sec.

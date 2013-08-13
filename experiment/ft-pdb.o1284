@@ -1,0 +1,45 @@
+
+number of processes = 512
+matrix size = 36417 x 36417 (2190591 nonzero entries)
+========== Error detected in R: 9.326562e+01 (eps = 1.000000e-04) at iteration 450 ==========
+sum of R = -1.163285e+08, checksum = -1.234050e+06
+========== Rollback to itertion 400 ==========
+========== Error detected in R: 3.085215e+01 (eps = 1.000000e-04) at iteration 1150 ==========
+sum of R = -3.928416e+07, checksum = -1.233328e+06
+========== Rollback to itertion 1100 ==========
+========== Error detected in R: 7.403966e+00 (eps = 1.000000e-04) at iteration 1800 ==========
+sum of R = -9.626138e+06, checksum = -1.145428e+06
+========== Rollback to itertion 1750 ==========
+========== Error detected in R: 9.959749e-03 (eps = 1.000000e-04) at iteration 1850 ==========
+sum of R = -1.066474e+06, checksum = -1.055957e+06
+========== Rollback to itertion 1750 ==========
+========== Error detected in R: 1.985218e+01 (eps = 1.000000e-04) at iteration 2700 ==========
+sum of R = -1.593056e+05, checksum = 8.450249e+03
+========== Rollback to itertion 2650 ==========
+========== Error detected in R: 2.191021e+02 (eps = 1.000000e-04) at iteration 4050 ==========
+sum of R = -1.486854e+04, checksum = 6.817237e+01
+========== Rollback to itertion 4000 ==========
+========== Error detected in R: 1.508651e+03 (eps = 1.000000e-04) at iteration 4150 ==========
+sum of R = 3.520946e+04, checksum = 2.332291e+01
+========== Rollback to itertion 4100 ==========
+========== Error detected in R: 2.804662e+01 (eps = 1.000000e-04) at iteration 5500 ==========
+sum of R = -1.077111e+02, checksum = 3.982425e+00
+========== Rollback to itertion 5450 ==========
+========== Error detected in R: 8.362355e+02 (eps = 1.000000e-04) at iteration 8600 ==========
+sum of R = 2.551691e-02, checksum = -3.055056e-05
+========== Rollback to itertion 8550 ==========
+========== Error detected in R: 5.347560e+03 (eps = 1.000000e-04) at iteration 8900 ==========
+sum of R = -1.569824e-01, checksum = -2.935041e-05
+========== Rollback to itertion 8850 ==========
+========== Error detected in R: 2.811683e+03 (eps = 1.000000e-04) at iteration 10600 ==========
+sum of R = -1.681341e-03, checksum = -5.977711e-07
+========== Rollback to itertion 10550 ==========
+CG: number of iterations     = 11538 (double = 11538, quad = 0)
+CG: elapsed time             = 6.331976e+00 sec.
+CG:   preconditioner         = 8.649826e-03 sec.
+CG:     matrix creation      = 1.907349e-06 sec.
+CG:   linear solver          = 6.323326e+00 sec.
+CG: relative residual 2-norm = 9.690651e-13
+
+CG: number of iterations     = 11538 (double = 11538, quad = 0)
+=== CG:   average linear solver          = 6.331976e+00 sec.
