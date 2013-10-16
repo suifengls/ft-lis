@@ -1,9 +1,7 @@
-FT-LIS (private)
+FT-LIS 
 ========
 
 **Fault-Tolerant Iterative Solver for Linear Systems**
-
-**Work harder for PPoPP 09/01/2013**
 
 **Assume: no error during preconditioning**
 
